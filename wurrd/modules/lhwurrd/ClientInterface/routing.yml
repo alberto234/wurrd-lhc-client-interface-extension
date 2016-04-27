@@ -1,0 +1,43 @@
+# Custom routes used by the Wurrd Client Interface plugin
+#
+# EN >> 3/8/2016 
+# It was discovered that some hosting providers block PUT and DELETE requests
+# As a workaround for such providers, we shall also support POST in addition to 
+# these specific methods.
+# 
+
+## -- Server Information
+
+# This route is used to request for server details without providing authentication
+wurrd_client_simple_server_info:
+    # Relative path from the Mibew web root is used here.
+    path: /wurrd/clientinterface/serverinfo
+    # Set some defaults for the request
+    defaults:
+        # This value is special. It tells the system what action should be
+        # invoked for the response
+        _controller: Wurrd\ClientInterface\Controller\ServerController::simpleInfoAction
+    methods: [GET]
+
+## -- Operator interactions
+
+wurrd_client_operator_login:
+    # The login request details are passed in as a JSON payload.
+    path: /wurrd/clientinterface/operator/login
+    defaults:
+        _controller: Wurrd\ClientInterface\Controller\OperatorController::loginAction
+    methods: [PUT, POST]
+
+
+wurrd_client_operator_refresh_access:
+    path: /wurrd/clientinterface/operator/refreshaccess/{accesstoken}/{refreshtoken}
+    defaults:
+        _controller: Wurrd\ClientInterface\Controller\OperatorController::refreshAccessAction
+    methods: [PUT, POST]
+
+wurrd_client_operator_logout:
+    path: /wurrd/clientinterface/operator/logout/{accesstoken}/{deviceuuid}
+    defaults:
+        _controller: Wurrd\ClientInterface\Controller\OperatorController::logoutAction
+    methods: [DELETE, POST]
+
