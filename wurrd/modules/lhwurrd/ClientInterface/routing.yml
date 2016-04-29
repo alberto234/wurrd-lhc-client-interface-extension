@@ -19,6 +19,16 @@ wurrd_client_simple_server_info:
         _controller: Wurrd\ClientInterface\Controller\ServerController::simpleInfoAction
     methods: [GET]
 
+# This route is use to request for server details with authentication
+# Expects HTTP Header X-Auth-Token = <deviceuuid>:<accesstoken>
+wurrd_client_detail_server_info:
+    path: /wurrd/clientinterface/serverinfo/details
+    defaults:
+        _controller: Wurrd\ClientInterface\Controller\ServerController::detailInfoAction
+    methods: [GET]
+
+
+
 ## -- Operator interactions
 
 wurrd_client_operator_login:
@@ -29,15 +39,23 @@ wurrd_client_operator_login:
     methods: [PUT, POST]
 
 
+# Expects HTTP Header X-Auth-Token = <deviceuuid>:<accesstoken>
 wurrd_client_operator_refresh_access:
-    path: /wurrd/clientinterface/operator/refreshaccess/{accesstoken}/{refreshtoken}
+    path: /wurrd/clientinterface/operator/refreshaccess/{refreshtoken}
     defaults:
         _controller: Wurrd\ClientInterface\Controller\OperatorController::refreshAccessAction
     methods: [PUT, POST]
 
+# Expects HTTP Header X-Auth-Token = <deviceuuid>:<accesstoken>
 wurrd_client_operator_logout:
-    path: /wurrd/clientinterface/operator/logout/{accesstoken}/{deviceuuid}
+    path: /wurrd/clientinterface/operator/logout
     defaults:
         _controller: Wurrd\ClientInterface\Controller\OperatorController::logoutAction
     methods: [DELETE, POST]
 
+# Expects HTTP Header X-Auth-Token = <deviceuuid>:<accesstoken>
+wurrd_client_operator_detailed_info:
+    path: /wurrd/clientinterface/operator/details
+    defaults:
+        _controller: Wurrd\ClientInterface\Controller\OperatorController::detailInfoAction
+    methods: [GET]

@@ -43,6 +43,7 @@ abstract class AbstractRequestProcessor {
             $controller = $this->getController($request);
             $response = call_user_func($controller, $request);
 		} catch (Exception $e) {
+			error_log('AbstractRequestProcessor::handleRequest exception');
 
 		}
 		

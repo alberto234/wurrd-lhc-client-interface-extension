@@ -29,7 +29,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Wurrd\ClientInterface\Classes\ClientInterfaceRequestProcessor;
 
 $request = Request::createFromGlobals();
-error_log('clientinterface request: '. print_r($request->attributes, true));
 $requestProcessor = new ClientInterfaceRequestProcessor($request);
 
 $response = $requestProcessor->handleRequest($request);

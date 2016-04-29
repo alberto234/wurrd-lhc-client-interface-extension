@@ -54,7 +54,7 @@ class AccessManagerAPI
 	 * @throws	\Wurrd\Exception\Http\UnauthorizedException
 	 *				With one of the following messages: 
 	 * 					- Constants::MSG_BAD_USERNAME_PASSWORD 
-	 * 			\Wurrd\Exception\HttpException
+	 * 			\Wurrd\Exception\Http\HttpException
 	 */
 	 public static function requestAccess($args) {
 	 	
@@ -109,15 +109,17 @@ class AccessManagerAPI
 	 * Determines if the given access token is valid to access the system
 	 * 
 	 * @param string $accessToken	The access token to check
+	 * @param string $deviceuuid	The unique id of the device associated with this token
 	 * @return bool true if allowed. 
-	 * @throws \Mibew\Exception\AccessDeniedException
+	 * @throws Http\Exception\AccessDeniedException
 	 * 
 	 * Exception codes are:
 	 * 			1 = invalid token
 	 * 			2 = expired token
 	 * 			3 = new token generated
+	 * 			4 = invalid device
 	 */
-	 public static function isAuthorized($accessToken) {
+	 public static function isAuthorized($accessToken, $deviceuuid) {
 	 	$authorization = Authorization::fetchByAccessToken($accessToken);
 		if ($authorization == false) {
 
@@ -127,7 +129,7 @@ class AccessManagerAPI
 			if ($authorization != false) {
 				throw new Exception\AccessDeniedException(
 						Constants::MSG_NEW_TOKEN_GENERATED,
-						7);
+						3);
 			} else {
 				throw new Exception\AccessDeniedException(Constants::MSG_INVALID_ACCESS_TOKEN, 1);
 			}
@@ -138,6 +140,18 @@ class AccessManagerAPI
 			throw new Exception\AccessDeniedException(Constants::MSG_EXPIRED_ACCESS_TOKEN, 2);
 		}
 		
+		// Check the deviceuuid. 
+		// How terrible is it to have another db query to get the deviceuuid?
+		// We can create a column for the deviceuuid in the authorization table such that only
+		// one query brings down the necessary data. Another option is to explore a DAO made up 
+		// of a join query.
+		$device = Device::fetch($authorization->deviceid);
+		if ($device == false || $device->deviceuuid != $deviceuuid) {
+			throw new Exception\AccessDeniedException(
+					Constants::MSG_INVALID_DEVICE,
+					4);
+		}
+				
 		// If the previous access token is set, clear it. This constitutes the acknowledgement that the
 		// new token was successfully received by the client.
 		if ($authorization->previousaccesstoken != null) {
@@ -156,6 +170,7 @@ class AccessManagerAPI
 	 * 
 	 * @param string $accessToken	The access token to check
 	 * @param string $refresToken	An unexpired refresh token is needed for this
+	 * @param string $deviceuuid	The unique id of the device associated with this token
 	 * @return Authorization - An instance of Authorization or false if a failure
 	 * @throws \Mibew\Http\Exception\HttpException	-- and subclasses
 	 * 
@@ -166,7 +181,7 @@ class AccessManagerAPI
 	 * 			5 = couldn't retrieve the operator
 	 * 			6 = couldn't retrieve the device
 	 */
-	 public static function refreshAccess($accessToken, $refreshToken)
+	 public static function refreshAccess($accessToken, $refreshToken, $deviceuuid)
 	 {
 	 	// TODO: What does it mean for a refresh token to expire? 
 		//		 The current algorithm is that the refresh is on a rolling interval
@@ -206,7 +221,17 @@ class AccessManagerAPI
 					4);
 		}
 				
-		$operator = operator_by_id($authorization->operatorid);
+
+		$operator = \erLhcoreClassModelUser::findOne(array(
+			'filter' => array(
+				'id' => $authorization->operatorid
+			)
+		));  
+
+		// TODO: In addition, we need to check if the user is still allowed to 
+		// access the system.
+		// It is here that we can also implement settings such as forcing all sessions
+		// to expire if the password changes.
 		if ($operator == null) {
 			throw new Exception\HttpException(
 					Response::HTTP_INTERNAL_SERVER_ERROR,
@@ -215,8 +240,8 @@ class AccessManagerAPI
 					5);
 		}
 		
-		$device = Device::load($authorization->deviceid);
-		if ($device == false) {
+		$device = Device::fetch($authorization->deviceid);
+		if ($device == false || $device->deviceuuid != $deviceuuid) {
 			throw new Exception\HttpException(
 					Response::HTTP_INTERNAL_SERVER_ERROR,
 					Constants::MSG_INVALID_DEVICE,
@@ -224,7 +249,7 @@ class AccessManagerAPI
 					6);
 		}
 
-		$newAccessToken = AccessManagerAPI::generateAccessToken($operator['vclogin']);
+		$newAccessToken = AccessManagerAPI::generateAccessToken($operator->username);
 		$newRefreshToken = AccessManagerAPI::generateRefreshToken($device->deviceuuid);
 		
 		// Update the authorization
@@ -238,7 +263,7 @@ class AccessManagerAPI
 		$authorization->dtmrefreshexpires = $newRefreshToken['expiretime'];
 		$authorization->dtmrefreshcreated = $newRefreshToken['created'];
 		
-		$authorization->save();
+		$authorization->saveThis();
 		
 		
 		return $authorization;
@@ -272,6 +297,10 @@ class AccessManagerAPI
 					2);
 		}
 		
+		// This uses the deviceuuid from the device object rather than the authorization object
+		// to emphasize that this is a destructive operation and we want to make sure we are 
+		// accessing the right device.
+		// Not sure why both values should be different, but just in case.
 		if ($device->deviceuuid != $deviceuuid) {
 			throw new Exception\AccessDeniedException(Constants::MSG_INVALID_DEVICE, 2);
 		}
@@ -284,6 +313,16 @@ class AccessManagerAPI
 		
 		return true;
 	 }	 
+
+	/**
+	 * Returns the version of this plugin
+	 * 
+	 * @return string plugin version. 
+	 */
+	public static function getAuthAPIPluginVersion()
+	{
+		return Constants::WCI_VERSION;
+	}
 
 
 
