@@ -258,6 +258,7 @@ switch ((int)$Params['user_parameters']['step_id']) {
     	       $tpl->set('admin_departament',$form->DefaultDepartament);
 
     	       /*DATABASE TABLES SETUP*/
+    	       // Note that $db below is a PDO object
     	       $db = ezcDbInstance::get();
 
         	   $db->query("CREATE TABLE IF NOT EXISTS `waa_device` (
@@ -271,7 +272,7 @@ switch ((int)$Params['user_parameters']['step_id']) {
 				  `dtmcreated` int NOT NULL DEFAULT 0,
 				  `dtmmodified` int NOT NULL DEFAULT 0,
 				  PRIMARY KEY (`id`),
-				  KEY `idx_device` (`deviceuuid`,`platform`)
+				  KEY `idx_device` (`deviceuuid`(256),`platform`)
 				) DEFAULT CHARSET=utf8;");
 
         	   $db->query("CREATE TABLE IF NOT EXISTS `waa_authorization` (
@@ -295,6 +296,24 @@ switch ((int)$Params['user_parameters']['step_id']) {
                   KEY `idx_deviceid` (`deviceid`),
                   KEY `idx_previousaccesstoken` (`previousaccesstoken`)
                 ) DEFAULT CHARSET=utf8;");
+
+                // The revision table
+        	   $db->query("CREATE TABLE IF NOT EXISTS `wci_revision` (
+                  `id` int(11) NOT NULL
+                ) DEFAULT CHARSET=utf8;");
+                
+                // Give the revision a default value of 0
+                $db->query("INSERT INTO `wci_revision` values (0);");
+                
+               // chat_extension - A table to extend columns of the chat table without
+               // 				modifying the core
+        	   $db->query("CREATE TABLE IF NOT EXISTS `wci_chat_extension` (
+				  `id` int(11) NOT NULL AUTO_INCREMENT,
+				  `chatid` int(11) NOT NULL,
+				  `revision` int(11) NOT NULL,
+				  PRIMARY KEY (`id`),
+    			  FOREIGN KEY (`chatid`) REFERENCES `lh_chat`(`id`) ON DELETE CASCADE
+				) DEFAULT CHARSET=utf8;");
 
             } else {
 

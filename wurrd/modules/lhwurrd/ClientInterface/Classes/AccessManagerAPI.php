@@ -189,7 +189,8 @@ class AccessManagerAPI
 		//		 If the client doesn't access the system within that duration, they 
 		//		 will need to login again. REFRESH_DURATION can be made configurable
 		
-	 	$authorization = Authorization::fetchByAccessToken($accessToken);
+		$currTime = time();
+		$authorization = Authorization::fetchByAccessToken($accessToken);
 		if ($authorization == false) {
 
 			$authorization = Authorization::fetchByPreviousAccessToken($accessToken);
@@ -201,7 +202,6 @@ class AccessManagerAPI
 
 			// Here, the request is using an old access token. Re-send the new tokens if they
 			// have not yet expired.
-			$currTime = time();
 			if ($currTime < $authorization->dtmaccessexpires) {
 				return $authorization;
 			}
@@ -215,12 +215,16 @@ class AccessManagerAPI
 			throw new Exception\AccessDeniedException(
 					Constants::MSG_INVALID_REFRESH_TOKEN,
 					3);
-		} else if (time() > $authorization->dtmrefreshexpires) {
+		} else if ($currTime > $authorization->dtmrefreshexpires) {
 			throw new Exception\AccessDeniedException(
 					Constants::MSG_EXPIRED_REFRESH_TOKEN,
 					4);
 		}
 				
+		// This mitigates race conditions from the client.
+		if (($currTime - $authorization->dtmaccesscreated) <= Constants::MIN_REFRESH_INTERVAL) {
+			return $authorization;
+		}
 
 		$operator = \erLhcoreClassModelUser::findOne(array(
 			'filter' => array(

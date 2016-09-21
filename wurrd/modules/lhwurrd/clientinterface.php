@@ -18,12 +18,13 @@
  */
  
  // This is where all the processing for wurrd/clientinterface will happen
-define(WURRD_EXTENSION_FS_ROOT, dirname(dirname(dirname(__FILE__))));
-
-$loader = require_once(WURRD_EXTENSION_FS_ROOT . '/vendor/autoload.php');
-$loader->addPsr4('', WURRD_EXTENSION_FS_ROOT . '/lib/classes/', true);
-$loader->addPsr4('Wurrd\\ClientInterface\\', __DIR__ . '/ClientInterface/', true);
  
+// define(WURRD_EXTENSION_FS_ROOT, dirname(dirname(dirname(__FILE__))));
+
+// $loader = require_once(WURRD_EXTENSION_FS_ROOT . '/vendor/autoload.php');
+//$loader->addPsr4('', WURRD_EXTENSION_FS_ROOT . '/lib/classes/', true);
+//$loader->addPsr4('Wurrd\\ClientInterface\\', __DIR__ . '/ClientInterface/', true);
+
 
 use Symfony\Component\HttpFoundation\Request;
 use Wurrd\ClientInterface\Classes\ClientInterfaceRequestProcessor;
@@ -34,7 +35,6 @@ $requestProcessor = new ClientInterfaceRequestProcessor($request);
 $response = $requestProcessor->handleRequest($request);
 
 
-	
 $response->send();
 
 exit();

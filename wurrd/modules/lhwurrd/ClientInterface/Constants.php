@@ -77,6 +77,12 @@ class Constants
 	const ACCESS_DURATION	 	= 3600;			// One hour
 	const REFRESH_DURATION 		= 2592000;		// 30 days
 
+	// This is the minimum time interval during which subsequent requests to 
+	// refresh the access token returns the same access token. This is required
+	// to mitigate race conditions on the client where multiple threads may be
+	// trying to refresh the access token simultaneously
+	const MIN_REFRESH_INTERVAL 	= 30; 		// 30 seconds
+
     /**
      * This class should not be instantiated
      */

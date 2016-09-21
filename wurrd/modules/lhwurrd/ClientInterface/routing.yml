@@ -59,3 +59,38 @@ wurrd_client_operator_detailed_info:
     defaults:
         _controller: Wurrd\ClientInterface\Controller\OperatorController::detailInfoAction
     methods: [GET]
+
+# Expects HTTP Header X-Auth-Token = <deviceuuid>:<accesstoken>
+wurrd_client_operator_users_update:
+    path: /wurrd/clientinterface/operator/users/updatethreads/{clientrevision}
+    defaults:
+        _controller: Wurrd\ClientInterface\Controller\UsersController::updateThreadsAction
+    methods: [GET]
+    requirements:
+        clientrevision: \d{1,10}
+
+# Expects HTTP Header X-Auth-Token = <deviceuuid>:<accesstoken>
+wurrd_client_operator_start_chat:
+    path: /wurrd/clientinterface/operator/threads/{threadid}/start
+    defaults:
+        _controller: Wurrd\ClientInterface\Controller\ThreadController::startChatAction
+    methods: [PUT, POST]
+    requirements:
+        threadid: \d{1,10}
+
+
+# A JSON object containing the request detail is expected in the body of the POST request. 
+# The JSON object should contain the field "threads" which will hold an array of thread details
+# containing the following fields: 
+#   - threadid
+#   - lastid
+# e.g {"threads" : [{"threadid":2, "lastid":23}, {"threadid":3, "lastid":95}]}
+# Q: What is the return?
+#
+# Expects HTTP Header X-Auth-Token = <deviceuuid>:<accesstoken>
+wurrd_client_operator_messages_update:
+    path: /wurrd/clientinterface/operator/threads/bulkupdatemessages
+    defaults:
+        _controller: Wurrd\ClientInterface\Controller\ThreadController::bulkUpdateMessagesAction
+    methods: [POST]
+
