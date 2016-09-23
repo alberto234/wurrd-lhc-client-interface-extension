@@ -91,7 +91,7 @@ class ChatExtension
         // Load chat extension info
 	   	$q = PersistentSession::getInstance()->createFindQuery('Wurrd\\ClientInterface\\Model\\ChatExtension');
 		$conditions = array();
-		$conditions[] = $q->expr->eq('revision', $q->bindValue($chatId) );
+		$conditions[] = $q->expr->eq('chatid', $q->bindValue($chatId) );
 		$q->where ($conditions);
 		try {
 			$chatExtensions = PersistentSession::getInstance()->find($q);
@@ -119,7 +119,7 @@ class ChatExtension
     public static function fecthUpdatedThreads($fromRevision)
     {
         // Check param
-        if ($fromRevision == null) {
+        if ($fromRevision === null) {
             return false;
         }
 

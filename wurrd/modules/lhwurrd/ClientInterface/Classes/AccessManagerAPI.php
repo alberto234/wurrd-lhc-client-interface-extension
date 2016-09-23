@@ -119,7 +119,7 @@ class AccessManagerAPI
 	 * 			3 = new token generated
 	 * 			4 = invalid device
 	 */
-	 public static function isAuthorized($accessToken, $deviceuuid) {
+	 public static function isAuthorized($accessToken, $deviceuuid, $checkDeviceUuid = true) {
 	 	$authorization = Authorization::fetchByAccessToken($accessToken);
 		if ($authorization == false) {
 
@@ -140,18 +140,20 @@ class AccessManagerAPI
 			throw new Exception\AccessDeniedException(Constants::MSG_EXPIRED_ACCESS_TOKEN, 2);
 		}
 		
-		// Check the deviceuuid. 
-		// How terrible is it to have another db query to get the deviceuuid?
-		// We can create a column for the deviceuuid in the authorization table such that only
-		// one query brings down the necessary data. Another option is to explore a DAO made up 
-		// of a join query.
-		$device = Device::fetch($authorization->deviceid);
-		if ($device == false || $device->deviceuuid != $deviceuuid) {
-			throw new Exception\AccessDeniedException(
-					Constants::MSG_INVALID_DEVICE,
-					4);
+		if ($checkDeviceUuid) {
+			// Check the deviceuuid. 
+			// How terrible is it to have another db query to get the deviceuuid?
+			// We can create a column for the deviceuuid in the authorization table such that only
+			// one query brings down the necessary data. Another option is to explore a DAO made up 
+			// of a join query.
+			$device = Device::fetch($authorization->deviceid);
+			if ($device == false || $device->deviceuuid != $deviceuuid) {
+				throw new Exception\AccessDeniedException(
+						Constants::MSG_INVALID_DEVICE,
+						4);
+			}
 		}
-				
+						
 		// If the previous access token is set, clear it. This constitutes the acknowledgement that the
 		// new token was successfully received by the client.
 		if ($authorization->previousaccesstoken != null) {

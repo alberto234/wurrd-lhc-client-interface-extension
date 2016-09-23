@@ -21,8 +21,10 @@
 namespace Wurrd\ClientInterface\Classes;
 
 
+use Symfony\Component\HttpFoundation\Response;
 use Wurrd\ClientInterface\Constants;
 use Wurrd\ClientInterface\Model\ChatExtension;
+use Wurrd\Http\Exception;
 
 
 /**
@@ -122,13 +124,6 @@ class ChatUtil extends  \erLhcoreClassChat
 		// We need to ensure that as the core is upgraded this logic doesn't
 		// get out of sync.
 
-		// $currentUser = \erLhcoreClassUser::instance();
-
-		//erLhcoreClassLog::write(print_r($_POST,true));
-		//[chats] => 2|5,2,5,2;8|0,5,2,0,5,2
-		//$_POST['chats']   = '6|5,1,4;8|0,5,2,0,5,2';
-		
-		
 		foreach($requestThreads as $requestThread) {
 			$chatId = $requestThread['threadid'];
 			$minMessageId = $requestThread['lastid'];
@@ -184,5 +179,176 @@ class ChatUtil extends  \erLhcoreClassChat
 		$arrayOut['threadmessages'] = $threadMessages;
 		return $arrayOut;
     }
+
+	/**
+	 * Start a chat session with a guest
+	 */
+	public static function startChat($chatId) {
+		if ($chatId == null) {
+	        throw new Exception\HttpException(Response::HTTP_BAD_REQUEST, 
+	        									Constants::MSG_WRONG_THREAD);
+		}
+		
+		try {
+			$chat = self::getSession()->load( 'erLhcoreClassModelChat', $chatId);
+			
+		} catch (\ezcPersistentObjectNotFoundException $ex) {
+	        throw new Exception\HttpException(Response::HTTP_BAD_REQUEST, 
+	        									Constants::MSG_WRONG_THREAD);
+		}
+
+		if (!self::hasAccessToRead($chat)) {
+			throw new Exception\AccessDeniedException(Constants::MSG_CANNOT_VIEW_THREADS);
+		}
+
+		// -------------
+		// This logic has been lifted from xml/chatdata
+		// We should watch out for when it is updated in the core.
+		// Ideally the core should provide a method for this so that
+		// this functionality is done only in one place.
+		// -------------
+			
+		// If status is pending change status to active		
+        $operatorAccepted = false;
+        $chatDataChanged = false;
+        
+        if ($chat->user_id == 0) {
+        	$currentUser =  \erLhcoreClassUser::instance();
+        	$chat->user_id = $currentUser->getUserID();
+        	$chatDataChanged = true;
+        }
+         
+        // If status is pending change status to active
+        if ($chat->status == \erLhcoreClassModelChat::STATUS_PENDING_CHAT) {
+        	$chat->status = \erLhcoreClassModelChat::STATUS_ACTIVE_CHAT;
+        
+        	if ($chat->wait_time == 0) {
+        		$chat->wait_time = time() - $chat->time;
+        	}
+        
+        	$chat->user_id = $currentUser->getUserID();
+        	$operatorAccepted = true;
+        	$chatDataChanged = true;
+        }
+         
+        if ($chat->support_informed == 0 || $chat->has_unread_messages == 1 ||  $chat->unread_messages_informed == 1) {
+        	$chatDataChanged = true;
+        }
+         
+        $chat->support_informed = 1;
+        $chat->has_unread_messages = 0;
+        $chat->unread_messages_informed = 0;
+        self::getSession()->update($chat);
+                
+	    if ($chatDataChanged == true) {
+	    	\erLhcoreClassChatEventDispatcher::getInstance()->dispatch('chat.data_changed',array('chat' => & $chat,'user' => $currentUser));
+	    }
+    	    
+	    if ($operatorAccepted == true) {
+	    	\erLhcoreClassChatEventDispatcher::getInstance()->dispatch('chat.accept',array('chat' => & $chat,'user' => $currentUser));
+	    	\erLhcoreClassChat::updateActiveChats($chat->user_id);
+	    	\erLhcoreClassChatWorkflow::presendCannedMsg($chat);
+	    	$options = $chat->department->inform_options_array;
+	    	\erLhcoreClassChatWorkflow::chatAcceptedWorkflow(array('department' => $chat->department,'options' => $options),$chat);
+	    };	    
+	}
+
+
+
+
+	/**
+	 * Close a chat session
+	 */
+	public static function closeChat($chatId) {
+		if ($chatId == null) {
+	        throw new Exception\HttpException(Response::HTTP_BAD_REQUEST, 
+	        									Constants::MSG_WRONG_THREAD);
+		}
+		
+		try {
+			$chat = self::getSession()->load( 'erLhcoreClassModelChat', $chatId);
+			
+		} catch (\ezcPersistentObjectNotFoundException $ex) {
+	        throw new Exception\HttpException(Response::HTTP_BAD_REQUEST, 
+	        									Constants::MSG_WRONG_THREAD);
+		}
+
+		// -------------
+		// This logic has been lifted from xml/chatdata
+		// We should watch out for when it is updated in the core.
+		// Ideally the core should provide a method for this so that
+		// this functionality is done only in one place.
+		// -------------
+
+		// Chat can be closed only by owner
+		$currentUser = \erLhcoreClassUser::instance();
+		if (!$currentUser->hasAccessTo('lhchat','allowcloseremote') &&
+			$chat->user_id != $currentUser->getUserID()) {
+			throw new Exception\AccessDeniedException(Constants::MSG_CANNOT_VIEW_THREADS);
+		}
+
+		
+		if ($chat->status != \erLhcoreClassModelChat::STATUS_CLOSED_CHAT) {
+		    $chat->status = \erLhcoreClassModelChat::STATUS_CLOSED_CHAT;
+		    $chat->chat_duration = self::getChatDurationToUpdateChatID($chat->id);
+	
+		    $userData = $currentUser->getUserData(true);
+	
+			// The business of posting a message should be a method that takes necessary parameters
+			self::postMessage($chat, 
+							  (string)$userData.' '.\erTranslationClassLhTranslation::getInstance()->getTranslation('chat/closechatadmin','has closed the chat!'),
+							  -1,
+							  null,
+							  false);
+
+		    self::updateActiveChats($chat->user_id);
+		    
+		    // Execute callback for close chat
+		    self::closeChatCallback($chat,$userData);
+		    
+		    \erLhcoreClassChatEventDispatcher::getInstance()->dispatch('chat.desktop_client_closed',array('chat' => & $chat));
+		}							
+	}
+
+	/**
+	 * Post message to a chat using its id.
+	 * 
+	 * The method throws an exception if the chat id is not valid
+	 */
+	public static function postMessageToChatId($chatId, $message, $userId, $nameSupport, $setLastMessageId) {
+		$chat = self::getSession()->load( 'erLhcoreClassModelChat', $chatId);
+		return self::postMessage($chat, $message, $userId, $nameSupport, $setLastMessageId);
+	}
+	
+	/**
+	 * Post a message to the specified thread.
+	 * 
+	 * @param erLhcoreClassModelChat $chat 
+	 * 
+	 * Prerequisite: $chat must be of type erLhcoreClassModelChat and valid. Not checks are made.
+	 */
+	public static function postMessage($chat, $message, $userId, $nameSupport, $setLastMessageId) {
+	    $msg = new \erLhcoreClassModelmsg();
+	    $msg->msg = $message;
+	    $msg->chat_id = $chat->id;
+	    $msg->user_id = $userId;
+		if ($nameSupport != null) {
+			$msg->name_support = $nameSupport;
+		}
+
+		// TODO: This is a questionable line.
+	    $chat->last_user_msg_time = $msg->time = time();
+
+	    self::getSession()->save($msg);
+
+        // Set last message ID
+        if ($setLastMessageId && $chat->last_msg_id < $msg->id) {
+        	$chat->last_msg_id = $msg->id;
+		}
+
+	    $chat->updateThis();
+		
+		return $msg->id;
+	}
 }
 

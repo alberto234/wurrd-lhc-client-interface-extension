@@ -32,6 +32,7 @@ $loader->addPsr4('Wurrd\\ClientInterface\\', $wurrdExtFSRoot . '/modules/lhwurrd
 
 
 use Wurrd\ClientInterface\Classes\ChatEventHandler;
+// use Wurrd\ClientInterface\Model\ChatExtension;
 
 class erLhcoreClassExtensionWurrd {
 
@@ -52,25 +53,40 @@ class erLhcoreClassExtensionWurrd {
 		// Attatch event listeners
 
 		// Chat Events
-		$dispatcher->listen('chat.chat_started', array($this,'chatStarted'));					
+		$dispatcher->listen('chat.chat_started', array($this,'chatStarted'));
+		$dispatcher->listen('chat.accept', array($this,'chatAccepted'));
 		$dispatcher->listen('chat.close',array($this,'chatClosed'));
 		$dispatcher->listen('chat.addmsguser', array($this,'chatNewMessage'));		
-		// $dispatcher->listen('chat.unread_chat',array($this,'unreadMessage'));	
+
+		// We are not yet sure of these		
+		// $dispatcher->listen('chat.data_changed',array($this,'chatDataChanged'));	
+		// $dispatcher->listen('chat.desktop_client_closed',array($this,'chatClosed'));	 // 'chat.close' is also called
+						
 	}
 	
 	
 	public function chatStarted($args) {
-		// error_log("Chat started - begin");
 		ChatEventHandler::chatStarted($args);
-		// error_log("Chat started - end");
+	}
+
+	public function chatAccepted($args) {
+		ChatEventHandler::chatAccepted($args);
+	}
+
+	public function chatDataChanged($args) {
+		ChatEventHandler::chatDataChanged($args);
 	}
 
 	public function chatClosed($args) {
-		error_log("Chat closed: args = " . print_r($args, true));
+		ChatEventHandler::chatClosed($args);
 	}
 
 	public function chatNewMessage($args) {
-		error_log("Chat has new message: args = " . print_r($args, true));
+		error_log("Chat has new message:");
+		
+		// $chat = $args['chat'];
+		// $chatExtension = ChatExtension::fecthByChatId($chat->id);
+		
 		
 		// error_log("Next revision = " . Revision::getNextRevision());
 	}

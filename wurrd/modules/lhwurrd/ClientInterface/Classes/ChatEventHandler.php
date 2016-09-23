@@ -38,7 +38,6 @@ class ChatEventHandler
 	 * @param Array $args - Arguments of this event
 	 */
 	public static function chatStarted($args) {
-		error_log('ChatEventHandler::chatStarted - 1');
 		$chat = $args['chat']; 		// Chat object
 		if ($chat == null) {
 			return;
@@ -46,22 +45,72 @@ class ChatEventHandler
 		
 		// If the thread doesn't already exist, create it.
 		// It is expected that the thread shouldn't exist
-		error_log('ChatEventHandler::chatStarted - 2');
 		$chatExtension = ChatExtension::fecthByChatId($chat->id);
-		error_log('ChatEventHandler::chatStarted - 3');
 		$nextRevision = Revision::getNextRevision();
-		error_log('ChatEventHandler::chatStarted - 4');
 		if ($chatExtension === false) {
-			error_log('Existing chat extension not found: Creating a new row');
 			$chatExtension = ChatExtension::createChatExtension($chat->id, $nextRevision);
 		} else {
-			error_log('Existing chat extension found: Updating revision');
 			$chatExtension->revision = $nextRevision;
 		}
-		
-		error_log('ChatEventHandler::chatStarted - 5');
 		$chatExtension->saveThis();
-		error_log('ChatEventHandler::chatStarted - 10');
+	}
+
+
+	/**
+	 * Handle chat.accepted event
+	 * @param Array $args - Arguments of this event
+	 */
+	public static function chatAccepted($args) {
+		$chat = $args['chat']; 		// Chat object
+		if ($chat == null) {
+			return;
+		}
+
+		self::updateChatRevision($chat);
+	}
+
+
+	/**
+	 * Handle chat.closed and chat.desktop_client_closed events
+	 * @param Array $args - Arguments of this event
+	 */
+	public static function chatClosed($args) {
+		$chat = $args['chat']; 		// Chat object
+		if ($chat == null) {
+			return;
+		}
+
+		self::updateChatRevision($chat);
+	}
+
+
+	/**
+	 * Handle chat.data_changed event
+	 * @param Array $args - Arguments of this event
+	 */
+	public static function chatDataChanged($args) {
+		$chat = $args['chat']; 		// Chat object
+		if ($chat == null) {
+			return;
+		}
+
+		self::updateChatRevision($chat);
+	}
+
+
+	/**
+	 * Helper method to update the chat revision
+	 */	
+	private static function updateChatRevision($chat) {
+		$chatExtension = ChatExtension::fecthByChatId($chat->id);
+		if ($chatExtension === false) {
+			// error_log('Existing chat extension not found: NOT creating a new row');
+		} else {
+			$nextRevision = Revision::getNextRevision();
+			// error_log('Existing chat extension found: Updating revision to ' . $nextRevision);
+			$chatExtension->revision = $nextRevision;
+			$chatExtension->saveThis();
+		}
 	}
 }
 

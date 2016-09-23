@@ -71,9 +71,19 @@ wurrd_client_operator_users_update:
 
 # Expects HTTP Header X-Auth-Token = <deviceuuid>:<accesstoken>
 wurrd_client_operator_start_chat:
-    path: /wurrd/clientinterface/operator/threads/{threadid}/start
+    path: /wurrd/clientinterface/operator/threads/start/{threadid}
     defaults:
         _controller: Wurrd\ClientInterface\Controller\ThreadController::startChatAction
+    methods: [PUT, POST]
+    requirements:
+        threadid: \d{1,10}
+
+
+# Expects HTTP Header X-Auth-Token = <deviceuuid>:<accesstoken>
+wurrd_client_operator_close_chat:
+    path: /wurrd/clientinterface/operator/threads/close/{threadid}
+    defaults:
+        _controller: Wurrd\ClientInterface\Controller\ThreadController::closeChatAction
     methods: [PUT, POST]
     requirements:
         threadid: \d{1,10}
@@ -92,5 +102,60 @@ wurrd_client_operator_messages_update:
     path: /wurrd/clientinterface/operator/threads/bulkupdatemessages
     defaults:
         _controller: Wurrd\ClientInterface\Controller\ThreadController::bulkUpdateMessagesAction
+    methods: [POST]
+
+
+# A JSON object containing the request detail is expected in the body of the POST request. 
+# The JSON object should contain the field "threadmessages" which will hold an array of message details
+# containing the following fields: 
+#   - threadid
+#   - messages[]
+#   -- message
+#   -- clientmessageid
+# e.g. {}
+# {"threadmessages":
+#  [{"threadid":4, "messages":
+#    [{"message":"This is message from operator: 4-1", "clientmessageid":55},
+#     {"message":"This is message from operator: 4-2", "clientmessageid":56}
+#    ]},
+#   {"threadid":5, "messages":
+#    [{"message":"This is message from operator: 5-1", "clientmessageid":57},
+#     {"message":"This is message from operator: 5-2", "clientmessageid":58}
+#    ]}
+#  ]}
+#
+# The response will contain a JSON object that holds an array mapping client message ids 
+# to server message ids.
+#
+# Expects HTTP Header X-Auth-Token = <deviceuuid>:<accesstoken>
+wurrd_client_operator_post_messages:
+    path: /wurrd/clientinterface/operator/threads/post
+    defaults:
+        _controller: Wurrd\ClientInterface\Controller\ThreadController::postMessagesAction
+    methods: [POST]
+
+
+# This route is an interface for the notification server to check for updates for multiple clients on this server
+# A JSON array containing the request detail for each client is expected in the body of the POST request 
+# Each element has the following fields:
+#   - accesstoken
+#   - threadrevision
+#   - activethreads[]
+#   -- threadid
+#   -- token
+#   -- lastid
+# e.g.
+#
+#
+# What is the return?
+#
+#
+# Authentication is embedded in the body of the request with the access token.
+#   This route doesn't validate against the deviceuuid, just the access token. This is ok
+#   because this interface cannot leak sensitive information
+wurrd_client_notification_server_bulk_check_for_updates:
+    path: /wurrd/clientinterface/notification/bulkcheckforupdates
+    defaults:
+        _controller: Wurrd\ClientInterface\Controller\NotificationController::bulkCheckForUpdatesAction
     methods: [POST]
 

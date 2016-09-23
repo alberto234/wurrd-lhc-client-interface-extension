@@ -52,7 +52,7 @@ class Constants
 	const MSG_INVALID_DEVICE			= 'InvalidDevice';
 	const MSG_INVALID_JSON				= 'InvalidJSON';
 	const MSG_INVALID_CLIENTID			= 'InvalidClientID';
-	const MSG_WRONG_TRHEAD				= 'WrongThread';
+	const MSG_WRONG_THREAD				= 'WrongThread';
 	const MSG_CANNOT_TAKEOVER			= 'CannotTakeover';
 	const MSG_CANNOT_TAKE_THREAD		= 'CannotTakeThread';
 	const MSG_CANNOT_VIEW_THREADS		= 'CannotViewThreads';
