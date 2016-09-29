@@ -2,6 +2,7 @@
 /*
  * NOT YET IMPLEMENTED!!!!!!!
  * 
+ * This has been borrowed from lhinstall/install.php
  * 
  * */
 try {

@@ -41,7 +41,7 @@ wurrd_client_operator_login:
 
 # Expects HTTP Header X-Auth-Token = <deviceuuid>:<accesstoken>
 wurrd_client_operator_refresh_access:
-    path: /wurrd/clientinterface/operator/refreshaccess/{refreshtoken}
+    path: /wurrd/clientinterface/operator/refreshaccess
     defaults:
         _controller: Wurrd\ClientInterface\Controller\OperatorController::refreshAccessAction
     methods: [PUT, POST]
@@ -133,6 +133,28 @@ wurrd_client_operator_post_messages:
     defaults:
         _controller: Wurrd\ClientInterface\Controller\ThreadController::postMessagesAction
     methods: [POST]
+
+
+# Ping a given chat thread, also indicating whether the operator is currently typing
+# TODO: List the parameters of the request
+#
+# Expects HTTP Header X-Auth-Token = <deviceuuid>:<accesstoken>
+wurrd_client_operator_ping_thread:
+    path: /wurrd/clientinterface/operator/threads/ping/{threadid}/{typed}
+    defaults:
+        _controller: Wurrd\ClientInterface\Controller\ThreadController::pingAction
+    methods: [PUT, POST]
+    requirements:
+        threadid: \d{1,10}
+
+# Get a list of canned responses accessible to the operator
+#
+# Expects HTTP Header X-Auth-Token = <deviceuuid>:<accesstoken>
+wurrd_client_operator_canned_responses:
+    path: /wurrd/clientinterface/operator/cannedresponses
+    defaults:
+        _controller: Wurrd\ClientInterface\Controller\CannedResponsesController::getCannedResponsesAction
+    methods: [GET]
 
 
 # This route is an interface for the notification server to check for updates for multiple clients on this server

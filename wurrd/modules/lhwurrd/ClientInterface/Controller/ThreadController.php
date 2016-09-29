@@ -219,9 +219,6 @@ class ThreadController extends AbstractController
 		        $messageUserId = $userData->id;
 		        $messageNameSupport = $userData->name_support;
 				
-				// $threadId = $request->attributes->getInt('threadid');
-				// ChatUtil::closeChat($threadId);
-
 				$data = json_decode($request->getContent(), true);
 		        $json_error_code = json_last_error();
 		        if ($json_error_code != JSON_ERROR_NONE) {
@@ -231,7 +228,6 @@ class ThreadController extends AbstractController
 									Constants::MSG_INVALID_JSON);
 				}
 				
-				// error_log("ThreadController::postMessagesAction - data: " . print_r($data, true));
 				$threadMessages = $data['threadmessages'];
 				foreach($threadMessages as $threadMessage) {
 					$threadId = $threadMessage['threadid'];
@@ -278,6 +274,60 @@ class ThreadController extends AbstractController
 		return $response;
 	}
 
+    /**
+     * Ping a chat session
+     *
+     * @param Request $request Incoming request.
+     * @return Response Rendered page content.
+     */
+    public function pingAction(Request $request)
+	{
+		$httpStatus = Response::HTTP_OK;
+		$message = Constants::MSG_SUCCESS;
+		$arrayOut = array();
+
+		// Response variables
+		$userTyping = null;
+		$canPost = null;
+		$threadState = null;
+		$threadAgentId = null;
+		
+		try {
+			$xAuthToken = $this->getXAuthToken($request);
+			$accessToken = $xAuthToken['accesstoken'];
+			$deviceuuid = $xAuthToken['deviceuuid'];
+
+			if (AccessManagerAPI::isAuthorized($accessToken, $deviceuuid)) {
+				$authorization = Authorization::fetchByAccessToken($accessToken);
+				$currentUser = \erLhcoreClassUser::instance();
+				$currentUser->setLoggedUser($authorization->operatorid);
+				
+				$threadId = $request->attributes->getInt('threadid');
+				$typed = filter_var($request->attributes->get('typed'), FILTER_VALIDATE_BOOLEAN);
+				
+				$result = ChatUtil::pingChat($threadId, $typed);
+				
+				$userTyping = $result['usertyping'];
+				$threadState = $result['threadstate'];
+				$threadAgentId = $result['threadagentid'];
+				$canPost = $result['canpost'];
+			}
+				
+			$arrayOut['usertyping'] = $userTyping;
+			$arrayOut['threadstate'] = $threadState;
+			$arrayOut['threadagentid'] = $threadAgentId;
+			$arrayOut['canpost'] = $canPost;
+		} catch(Exception\HttpException $e) {
+			$httpStatus = $e->getStatusCode();
+			$message = $e->getMessage();
+		}
+		
+		$arrayOut['message'] = $message;
+		$response = new Response(json_encode($arrayOut),
+								$httpStatus,
+								array('content-type' => 'application/json'));
+		return $response;
+	}
 
 }
 

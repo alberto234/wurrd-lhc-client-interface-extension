@@ -61,6 +61,10 @@ class UsersUtil
 			$arrayOut['threads'] = $activeChats;
 		}	
 		$arrayOut['lastrevision'] = $newRevision;
+		
+		// Update the current user's last activity
+		$currentUser->updateLastVisit();
+
 		return $arrayOut;
 	}
 }

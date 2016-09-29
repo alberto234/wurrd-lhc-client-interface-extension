@@ -124,8 +124,18 @@ class OperatorController extends AbstractController
 			$xAuthToken = $this->getXAuthToken($request);
 			$accessToken = $xAuthToken['accesstoken'];
 			$deviceuuid = $xAuthToken['deviceuuid'];
-			$refreshToken = $request->attributes->get("refreshtoken");
 
+			$data = json_decode($request->getContent(), true);
+	        $json_error_code = json_last_error();
+	        if ($json_error_code != JSON_ERROR_NONE) {
+	            // Not valid JSON
+	            throw new Exception\HttpException(
+								Response::HTTP_BAD_REQUEST,
+								Constants::MSG_INVALID_JSON);
+			}
+
+			$refreshToken = $data['refreshtoken'];
+			
 			$authorization = AccessManagerAPI::refreshAccess($accessToken, $refreshToken, $deviceuuid);
 			$arrayOut = array(
 						'accesstoken' => $authorization->accesstoken,

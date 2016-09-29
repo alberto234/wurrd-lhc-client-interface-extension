@@ -65,8 +65,10 @@ class ServerUtil
 						'authapiversion' => AccessManagerAPI::getAuthAPIPluginVersion(),
 						'installationid' => $installationid,
 						'name' => $globalConfigs->getSetting('site', 'title'),
-						'logourl' => '', // We will sort this later. Logos are set by theme, however we are looking for admin logo
-						'usepost' => ServerUtil::usePost(),
+						// We will sort this later. Logos are set by theme, however we are looking for admin logo
+						// For now, hard code to the LHC logo
+						'logourl' => 'http://wurrdapp.com/main/lhc/lhc_official.png', 
+						'usepost' => self::usePost(),
 						'email' => $contactEmail,
 					);
 		} else {

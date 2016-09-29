@@ -32,45 +32,6 @@ use Wurrd\Http\Exception;
 class NotificationController extends AbstractController
 {
 
-	private function checkForThreadListUpdate($client) {
-		$arrayOut = array('lastrevision' => 0);
-		if (AccessManagerAPI::isAuthorized($client['accesstoken'], null, false)) {
-			$authorization = Authorization::fetchByAccessToken($client['accesstoken']);
-			$currentUser = \erLhcoreClassUser::instance();
-			$currentUser->setLoggedUser($authorization->operatorid);
-
-			$newRevision = 0;
-			$activeChats = ChatUtil::getUpdatedThreads($currentUser, (int)$client['threadrevision'], $newRevision);
-			$arrayOut['lastrevision'] = $newRevision;
-		}
-		
-		return $arrayOut;
-	}
-
-	private function checkForActiveThreadUpdates($client) {
-		$arrayOut = array('threadmessages' => array());
-		if (AccessManagerAPI::isAuthorized($client['accesstoken'], null, false)) {
-			$authorization = Authorization::fetchByAccessToken($client['accesstoken']);
-			$currentUser = \erLhcoreClassUser::instance();
-			$currentUser->setLoggedUser($authorization->operatorid);
-
-			$threadMessages =  ChatUtil::updateMessages($client['activethreads']);
-			
-			$output = array();
-			foreach($threadMessages['threadmessages'] as $threadMessage) {
-				$temp = array();
-				$temp['threadid'] = $threadMessage['threadid'];
-				$temp['lastid'] = $threadMessage['lastid'];
-				$output[] = $temp;
-			}
-			
-			$arrayOut['threadmessages'] = $output;
-		}
-		
-		return $arrayOut;
-	}
-
-
     /**
      * Retrieves the server details that are available for 
 	 * public consumption
@@ -140,6 +101,49 @@ class NotificationController extends AbstractController
 		return $response;
   
     }
+
+
+	private function checkForThreadListUpdate($client) {
+		$arrayOut = array('lastrevision' => 0);
+		if (AccessManagerAPI::isAuthorized($client['accesstoken'], null, false)) {
+			$authorization = Authorization::fetchByAccessToken($client['accesstoken']);
+			$currentUser = \erLhcoreClassUser::instance();
+			$currentUser->setLoggedUser($authorization->operatorid);
+
+			$newRevision = 0;
+			$activeChats = ChatUtil::getUpdatedThreads($currentUser, (int)$client['threadrevision'], $newRevision);
+			$arrayOut['lastrevision'] = $newRevision;
+			
+			// Update the current user's last activity
+			$currentUser->updateLastVisit();
+		}
+		
+		return $arrayOut;
+	}
+	
+
+	private function checkForActiveThreadUpdates($client) {
+		$arrayOut = array('threadmessages' => array());
+		if (AccessManagerAPI::isAuthorized($client['accesstoken'], null, false)) {
+			$authorization = Authorization::fetchByAccessToken($client['accesstoken']);
+			$currentUser = \erLhcoreClassUser::instance();
+			$currentUser->setLoggedUser($authorization->operatorid);
+
+			$threadMessages =  ChatUtil::updateMessages($client['activethreads']);
+			
+			$output = array();
+			foreach($threadMessages['threadmessages'] as $threadMessage) {
+				$temp = array();
+				$temp['threadid'] = $threadMessage['threadid'];
+				$temp['lastid'] = $threadMessage['lastid'];
+				$output[] = $temp;
+			}
+			
+			$arrayOut['threadmessages'] = $output;
+		}
+		
+		return $arrayOut;
+	}
 
 }
 

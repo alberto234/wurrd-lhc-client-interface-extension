@@ -92,7 +92,7 @@ class ChatUtil extends  \erLhcoreClassChat
 			$oneUpdatedThread['userName'] 		= $oneThread->nick;
 			$oneUpdatedThread['remote'] 		= $oneThread->ip;
 			$oneUpdatedThread['agentId'] 		= $oneThread->user_id;
-			$oneUpdatedThread['state'] 			= $oneThread->status;
+			$oneUpdatedThread['state'] 			= self::convertToWurrdChatState($oneThread->status);
 			$oneUpdatedThread['totalTime'] 		= $oneThread->time;
 			$oneUpdatedThread['locale']			= $oneThread->chat_locale;
 			$oneUpdatedThread['groupid'] 		= $oneThread->dep_id;
@@ -350,5 +350,109 @@ class ChatUtil extends  \erLhcoreClassChat
 		
 		return $msg->id;
 	}
+
+	/**
+	 * Ping the chat thread
+	 * 
+	 * @param int $chatId	The id of the chat to ping
+	 * @param Boolean $operatorTyping	An indicator whether the operator is currently typing.
+	 * @return Array 	giving feedback about the chat to the caller
+	 */	
+	 public static function pingChat($chatId, $operatorTyping) {
+	 	$arrayOut = array();
+		if ($chatId == null) {
+	        throw new Exception\HttpException(Response::HTTP_BAD_REQUEST, 
+	        									Constants::MSG_WRONG_THREAD);
+		}
+		
+		try {
+			$chat = self::getSession()->load( 'erLhcoreClassModelChat', $chatId);
+			if (self::hasAccessToRead($chat) )
+			{    	
+				self::setOperatorTyping($chat, $operatorTyping);
+				
+				$arrayOut['usertyping'] = $chat->is_user_typing;
+				$arrayOut['threadstate'] = self::convertToWurrdChatState($chat->status);
+				$arrayOut['threadagentid'] = $chat->user_id;
+				$arrayOut['canpost'] = true; 	// Assume true. The client should figure this out through other means
+			}
+		} catch (\ezcPersistentObjectNotFoundException $ex) {
+	        throw new Exception\HttpException(Response::HTTP_BAD_REQUEST, 
+	        									Constants::MSG_WRONG_THREAD);
+		}
+
+		return $arrayOut;	
+	 }
+	 
+	/**
+	 * Helper method to map LHC chat statuses to Wurrd chat statuses
+	 * 
+	 * These are the Wurrd chat statuses support
+	 * 		WURRD									LHC
+			int CHAT_STATE_QUEUE		= 0		<=	STATUS_PENDING_CHAT	= 0
+			int CHAT_STATE_WAITING		= 1		-	N/A
+			int CHAT_STATE_CHATTING		= 2		<=	STATUS_ACTIVE_CHAT 	= 1
+			int CHAT_STATE_CLOSED		= 3		<=	STATUS_CLOSED_CHAT	= 2
+			int CHAT_STATE_LOADING		= 4		-	N/A
+			int CHAT_STATE_LEFT			= 5		-	N/A
+			int CHAT_STATE_INVITED		= 6		-	N/A
+	 *  
+	 */
+	 public static function convertToWurrdChatState($lhcChatStatus) {
+	 	$wurrdChatStatus = 0;
+	 	switch($lhcChatStatus) {
+			case \erLhcoreClassModelChat::STATUS_PENDING_CHAT:
+				$wurrdChatStatus = 0;
+				break;
+			case \erLhcoreClassModelChat::STATUS_ACTIVE_CHAT:
+				$wurrdChatStatus = 2;
+				break;
+			case \erLhcoreClassModelChat::STATUS_CLOSED_CHAT:
+				$wurrdChatStatus = 3;
+				break;
+			default:
+				// We are not yet accounting for any other status. Mark others as closed
+				$wurrdChatStatus = 3;
+				break;
+	 	}
+		
+		return $wurrdChatStatus;
+	 }
+	 
+	 
+	 /**
+	  * Helper method to set the operator's typing status.
+	  */
+	 private static function setOperatorTyping($chat, $operatorTyping) {
+	 	
+		// -------------
+		// This logic has been lifted from lhchat/operatortyping.php
+		// We should watch out for when it is updated in the core.
+		// Ideally the core should provide a method for this so that
+		// this functionality is done only in one place.
+		// -------------
+
+		$currentUser = \erLhcoreClassUser::instance();
+
+		// Rewritten in a more efficient way
+		$db = \ezcDbInstance::get();
+		$stmt = $db->prepare('UPDATE lh_chat SET operator_typing = :operator_typing, operator_typing_id = :operator_typing_id WHERE id = :id');
+		$stmt->bindValue(':id',$chat->id,\PDO::PARAM_INT);
+				
+	    if ($operatorTyping) {
+	    	$stmt->bindValue(':operator_typing',time(),\PDO::PARAM_INT);
+	    	$stmt->bindValue(':operator_typing_id',$currentUser->getUserID(),\PDO::PARAM_INT); 
+	    } else {
+	    	// Do we need the else of this statement? 
+	    	// The check for is_operator_typing factors in the age of the last time the chat
+	    	// was marked that the operator was typing. This call can be made as frequently as
+	    	// 2 seconds. Depending on how fast other clients read this field, some clients 
+	    	// may miss that the operator has entered some keystrokes.
+	    	$stmt->bindValue(':operator_typing',0,\PDO::PARAM_INT);
+	    	$stmt->bindValue(':operator_typing_id',0,\PDO::PARAM_INT);  
+	    }
+	    
+	    $stmt->execute();             
+	 }
 }
 

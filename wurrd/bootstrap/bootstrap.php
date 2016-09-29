@@ -82,13 +82,7 @@ class erLhcoreClassExtensionWurrd {
 	}
 
 	public function chatNewMessage($args) {
-		error_log("Chat has new message:");
-		
-		// $chat = $args['chat'];
-		// $chatExtension = ChatExtension::fecthByChatId($chat->id);
-		
-		
-		// error_log("Next revision = " . Revision::getNextRevision());
+		// Do nothing
 	}
 }
 
