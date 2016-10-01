@@ -69,6 +69,15 @@ class ChatUtil extends  \erLhcoreClassChat
     	$filter['offset'] = 0;
     	$filter['smart_select'] = true;
 		
+		if ($requestRevision == 0) {
+			// Client doesn't have any record of previous chats. 
+			// Filter out closed chats
+			
+			// In the array we are below defining, the keys are not used.
+	    	$filter['filterin']['status'] = array('pending' => \erLhcoreClassModelChat::STATUS_PENDING_CHAT,
+												  'active' 	=> \erLhcoreClassModelChat::STATUS_ACTIVE_CHAT);
+		}
+		
 		// Add an "IN" filter for the candidate threads that we are looking at.
 		$chatIds = array();
 		$first = true;
