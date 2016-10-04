@@ -1,5 +1,5 @@
 vendor/
-/node_modules/
-/release/
+node_modules/
+release/
 .DS_Store
 composer.lock
