@@ -36,7 +36,8 @@ var getSources = function() {
              'bootstrap/**',
              'lib/**',
              'modules/**',
-             'vendor/**'
+             'vendor/**',
+             'database/**'
         ],
         {base: './'}
     )
