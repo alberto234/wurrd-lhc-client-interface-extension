@@ -63,8 +63,14 @@ function showForm() {
 
 
 function readClientInterfaceSettings() {
+	// Disable errors
+	$oldErrorLevel = error_reporting();
+	error_reporting(0);
+
 	$settingsFile = __DIR__ . '/modules/lhwurrd/ClientInterface/settings.ini.php';
 	$config = include($settingsFile);
+
+	error_reporting($oldErrorLevel);	
 	return $config;
 }
 

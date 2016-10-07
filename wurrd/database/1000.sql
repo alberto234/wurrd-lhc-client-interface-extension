@@ -17,7 +17,7 @@ CREATE TABLE `waa_authorization` (
   `dtmrefreshexpires` int(11) NOT NULL,
   `previousaccesstoken` varchar(256) DEFAULT NULL,
   `previousrefreshtoken` varchar(256) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -35,7 +35,7 @@ CREATE TABLE `waa_device` (
   `osversion` varchar(32) DEFAULT NULL,
   `dtmcreated` int(11) NOT NULL DEFAULT '0',
   `dtmmodified` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -47,7 +47,7 @@ CREATE TABLE `wci_chat_extension` (
 `id` int(11) NOT NULL,
   `chatid` int(11) NOT NULL,
   `revision` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -57,7 +57,7 @@ CREATE TABLE `wci_chat_extension` (
 
 CREATE TABLE `wci_revision` (
   `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
@@ -107,8 +107,9 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for table `wci_chat_extension`
 --
-ALTER TABLE `wci_chat_extension`
-ADD CONSTRAINT `wci_chat_extension_ibfk_1` FOREIGN KEY (`chatid`) REFERENCES `lh_chat` (`id`) ON DELETE CASCADE;
+-- This fails on some systems
+-- ALTER TABLE `wci_chat_extension`
+-- ADD CONSTRAINT `wci_chat_extension_ibfk_1` FOREIGN KEY (`chatid`) REFERENCES `lh_chat` (`id`) ON DELETE CASCADE;
 
 
 --

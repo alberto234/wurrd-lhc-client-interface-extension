@@ -1,0 +1,15 @@
+# deny *everything*
+<FilesMatch ".*\..*">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+
+# Allow configure.php in the next two sections
+<Files configure.php>
+	Allow from all
+</Files>
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteRule ^configure.php - [L]
+</IfModule>

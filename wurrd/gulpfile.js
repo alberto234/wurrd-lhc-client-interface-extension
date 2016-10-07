@@ -32,6 +32,7 @@ gulp.task('default', ['prepare-release'], function() {
  */
 var getSources = function() {
     return gulp.src([
+             '.htaccess',
              'configure.php',
              'bootstrap/**',
              'lib/**',
