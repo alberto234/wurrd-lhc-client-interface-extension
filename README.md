@@ -2,9 +2,10 @@
 
 This extension provides an interface for the Wurrd app to communicate with a LiveHelperChat server.
 
+
 ## Wurrd App
 
-Wurrd is an app that provides operators the ability to chat with website visitors from their mobile devices. This extension exposes an API that the Wurrd app uses to communicate with a LiveHelperChat server. The app can be downloaded from [Google Play](https://play.google.com/store/apps/details?id=com.scalior.wurrd) and from the [App Store](https://itunes.apple.com/us/app/wurrd/id1017128684?mt=8). 
+Wurrd is an app that provides operators the ability to chat with website visitors from their mobile devices. This extension exposes an API that the Wurrd app uses to communicate with a LiveHelperChat server. The app can be downloaded from [Google Play](https://play.google.com/store/apps/details?id=com.scalior.wurrd) and from the [App Store](https://itunes.apple.com/us/app/wurrd/id1017128684?mt=8). _(iOS not yet integrated with LHC)_
 
 
 ## Installation
@@ -17,18 +18,20 @@ Full install and update instructions with pictures can be found on the [Wurrd we
 1. Navigate to "`<LHC Base URL>`/index.php/wurrd/install" and follow the steps to complete the installation.
 1. Click 'basic test' at the end of the installation to confirm that the installation was successful. You should see the following text:
 
-code
-code
+`
+{"message":"Success","apiversion":"1000","chatplatform":"livehelperchat","usepost":false}
+`
 
 
 ## Updating
 
 Not yet implemented.
 
+
 ## Extension's configurations
 
 A configuration tool is provided to make some changes to configuration after installation. 
-Access the tool at <LHC Base URL>`/extension/wurrd/configure.php
+Access the tool at `<LHC Base URL>`/extension/wurrd/configure.php
 
 The following config properties are available:
 
@@ -51,8 +54,9 @@ Type: `String`
 This is needed for reporting on the health of the app. 
 
 
+
 ## Change log
-The change log can be found at https://github.com
+The change log can be found at https://github.com/alberto234/wurrd-lhc-client-interface-extension/blob/master/wurrd/changelog.txt
 
 
 
