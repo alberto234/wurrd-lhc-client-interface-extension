@@ -36,21 +36,39 @@ class Config
     public function __construct()
     {
 		$this->settingsFile = __DIR__ . '/../settings.ini.php';
-	    $this->conf = include($this->settingsFile);
-	    	  	
-		/**
-		 * At this stage let's not worry about the default settings file.
-		 * Once we figure out installation of extensions using a GUI, we 
-		 * shall impement the default.
-		 * We have removed the '@' in front of the include above such that 
-		 * we get an error if this file is not present.
-         if ( !is_array($this->conf) ) {
-		    	$this->conf = include(__DIR__ . '/../settings.default.ini.php');
-         } */
+		$this->reload();
     }
 
+	public function reload() {
+		if (is_readable($this->settingsFile)) {
+	    	$this->conf = include($this->settingsFile);
+		} else {
+			$this->conf = null;
+		}
+	}
+	
+	/**
+	 * This overwrites the current config
+	 */
+	public function setConfig($config) {
+		if (is_array($config)) {
+			$this->conf = $config;
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public function isValid() {
+		return is_array($this->conf);
+	}
+	
     public function getSetting($section, $key, $throwException = true)
     {
+    	if (!$this->isValid()) {
+    		return false;
+    	}
+
         if (isset($this->conf['settings'][$section][$key])) {
             return $this->conf['settings'][$section][$key];
         } else {
@@ -64,11 +82,19 @@ class Config
 
     public function hasSetting($section, $key)
     {
+    	if (!$this->isValid()) {
+    		return false;
+    	}
+    	
         return isset($this->conf['settings'][$section][$key]);
     }
 
     public function setSetting($section, $key, $value)
     {
+    	if (!$this->isValid()) {
+    		return false;
+    	}
+
         $this->conf['settings'][$section][$key] = $value;
     }
 
@@ -83,6 +109,10 @@ class Config
 
     public function save()
     {
+    	if (!$this->isValid()) {
+    		return false;
+    	}
+
         file_put_contents($this->settingsFile, "<?php\n return ".var_export($this->conf,true).";\n?>");
     }
 }

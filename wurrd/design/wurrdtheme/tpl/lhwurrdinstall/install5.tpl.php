@@ -1,6 +1,5 @@
 <?php
-
-/*
+ /*
  * This file is a part of Wurrd extension for LiveHelperChat.
  *
  * Copyright 2016 Eyong N <eyongn@scalior.com>.
@@ -17,22 +16,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-$Module = array( "name" => "Wurrd Client Interface module");
-
-$ViewList = array();
-
-$ViewList['clientinterface'] = array(
-    'params' => array()
-);
-
-$ViewList['install'] = array(
-    'script' => 'install.php',
-    'params' => array('step_id')
-);
-
-
-$FunctionList = array();
-
-
 ?>
+
+<img src="<?php echo erLhcoreClassDesign::design('images/general/logo.png');?>" alt="Live Helper Chat" title="Live Helper Chat" />
+
+<h1>Wurrd Client Interface Installation was completed</h1>
+
+<div class="panel">
+<p>Installation was previously completed. Nothing else to do.
+
+Click <a href="<?php echo erLhcoreClassDesign::baseurl('wurrd/clientinterface/serverinfo')?>">here for basic testing.</a>
+</p>
+<br>
+</div>

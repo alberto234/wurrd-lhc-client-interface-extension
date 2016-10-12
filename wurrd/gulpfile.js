@@ -35,10 +35,10 @@ var getSources = function() {
              '.htaccess',
              'configure.php',
              'bootstrap/**',
+             'design/**',
              'lib/**',
              'modules/**',
-             'vendor/**',
-             'database/**'
+             'vendor/**'
         ],
         {base: './'}
     )
