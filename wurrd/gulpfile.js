@@ -38,6 +38,7 @@ var getSources = function() {
              'design/**',
              'lib/**',
              'modules/**',
+             'modules/lhwurrd/cache/.keep',
              'vendor/**'
         ],
         {base: './'}
