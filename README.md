@@ -1,6 +1,6 @@
 # Wurrd Client Interface extension for LiveHelperChat
 
-This extension provides an interface for the Wurrd app to communicate with a LiveHelperChat server.
+This extension provides an interface for the Wurrd app to communicate with a [LiveHelperChat](https://livehelperchat.com) server.
 
 
 ## Wurrd App
