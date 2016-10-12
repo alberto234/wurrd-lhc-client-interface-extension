@@ -1,0 +1,13 @@
+
+Issues tracked in GitHub repository https://github.com/alberto234/wurrd-lhc-client-interface-extension/issues
+
+
+1.0.1  - 2016-10-12
+===================
+- Downgraded minimum requirement to PHP 5.3 from PHP 5.5. LiveHelperChat requires PHP 5.4. (Github issue 1)
+- Streamlined installation process (Github issue 2)
+
+
+1.0.0
+=====
+- Initial release
