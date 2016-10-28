@@ -57,17 +57,17 @@ class ServerUtil
 			// If this is not valid, throw an exception requesting that the user install the extension.
 			// We should actually catch this way before this, in the entry clientinterface.php file
 			
+			$nameAndLogo = self::getNameAndLogo();
+			
 			return array(
 						'chatplatform' => Constants::WCI_CHAT_PLATFORM,
-						'chatplatformversion' => \erLhcoreClassUpdate::LHC_RELEASE / 100,
+						'chatplatformversion' => number_format(\erLhcoreClassUpdate::LHC_RELEASE / 100.0, 2),
 						'interfaceversion' => Constants::WCI_VERSION,
 						'apiversion' => Constants::WCI_API_VERSION,
 						'authapiversion' => AccessManagerAPI::getAuthAPIPluginVersion(),
 						'installationid' => $installationid,
-						'name' => $globalConfigs->getSetting('site', 'title'),
-						// We will sort this later. Logos are set by theme, however we are looking for admin logo
-						// For now, hard code to the LHC logo
-						'logourl' => 'http://wurrdapp.com/main/lhc/lhc_official.png', 
+						'name' => $nameAndLogo['name'],
+						'logourl' => $nameAndLogo['logourl'], 
 						'usepost' => self::usePost(),
 						'email' => $contactEmail,
 					);
@@ -85,6 +85,40 @@ class ServerUtil
 			FILTER_VALIDATE_BOOLEAN);
 	}
 	
+	/**
+	 * Return an array that contains the appropriate server name and logo
+	 * 
+	 * This logic is borrowed from page_head_logo.tpl.php
+	 */
+	private static function getNameAndLogo() {
+		// Check if a custom theme has been set to use as default.
+		//		Get name and logo from custom default theme
+		// 		If info not set in custom default theme, get info from default location
+		// If custom theme not set, get info from default location
+		
+		// Assume default logo
+		$logoUrl = \erLhcoreClassDesign::design('images/general/logo_user.png');
+		$name = \erLhcoreClassModelChatConfig::fetch('customer_company_name')->current_value;
+
+		$defaultTheme = \erLhcoreClassModelChatConfig::fetch('default_theme_id')->current_value;
+		if ($defaultTheme > 0) {
+			try {
+				$theme = \erLhAbstractModelWidgetTheme::fetch($defaultTheme);
+				if ($theme->logo_image_url !== false) {
+					$logoUrl = $theme->logo_image_url;
+				}
+				
+				// Why don't we check whether the company name has been set and use the default name instead?
+				$name = $theme->name_company;
+			} catch (Exception $e) {
+					
+			}
+		}
+		
+		return array (	'name' => $name,
+						'logourl' => $logoUrl,
+						);
+	}
 	
 }
 

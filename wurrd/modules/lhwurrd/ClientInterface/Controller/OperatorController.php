@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Wurrd\ClientInterface\Classes\AccessManagerAPI;
 use Wurrd\ClientInterface\Classes\OperatorUtil;
 use Wurrd\ClientInterface\Classes\ServerUtil;
+use Wurrd\ClientInterface\Classes\UrlGeneratorUtil;
 use Wurrd\ClientInterface\Constants;
 use Wurrd\ClientInterface\Model\Device;
 use Wurrd\ClientInterface\Model\Authorization;
@@ -82,13 +83,16 @@ class OperatorController extends AbstractController
 															 ));
 				
 				// Fix the operator's avatar by getting the URL from the relative path
-				/*if ($operatorArray['avatarurl'] != null && strlen($operatorArray['avatarurl']) > 0) {
-					$operatorArray['avatarurl'] = $this->asset($operatorArray['avatarurl']);
-				}*/
+				if ($operatorArray['avatarurl'] != null && strlen($operatorArray['avatarurl']) > 0) {
+					$operatorArray['avatarurl'] = UrlGeneratorUtil::getFullURL($request, $operatorArray['avatarurl']);
+				}
 				
 				$serverInfoArray = ServerUtil::getDetailedInfo(array('accesstoken' => $authorization->accesstoken,
 															 'deviceuuid' => $authRequest[Constants::DEVICEUUID_KEY],
 															 ));
+				
+				// Fix the logo url if necessary
+				$serverInfoArray['logourl'] = UrlGeneratorUtil::getFullURL($request, $serverInfoArray['logourl']);
 				
 				$arrayOut['authorization'] = $authArray;
 				$arrayOut['operator'] = $operatorArray;
@@ -211,6 +215,11 @@ class OperatorController extends AbstractController
 					  	Constants::DEVICEUUID_KEY => $xAuthToken['deviceuuid']);
 		
 			$arrayOut = OperatorUtil::getInfo($args);
+
+			// Fix the operator's avatar by getting the URL from the relative path
+			if ($arrayOut['avatarurl'] != null && strlen($arrayOut['avatarurl']) > 0) {
+				$arrayOut['avatarurl'] = UrlGeneratorUtil::getFullURL($request, $arrayOut['avatarurl']);
+			}
 		} catch(Exception\HttpException $e) {
 			$httpStatus = $e->getStatusCode();
 			$message = $e->getMessage();

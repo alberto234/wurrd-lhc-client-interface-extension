@@ -23,6 +23,7 @@ namespace Wurrd\ClientInterface\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Wurrd\ClientInterface\Classes\ServerUtil;
+use Wurrd\ClientInterface\Classes\UrlGeneratorUtil;
 use Wurrd\ClientInterface\Constants;
 use Wurrd\ClientInterface\Model\Device;
 use Wurrd\ClientInterface\Model\Authorization;
@@ -73,6 +74,10 @@ class ServerController extends AbstractController
 					  	Constants::DEVICEUUID_KEY => $xAuthToken['deviceuuid']);
 		
 			$arrayOut = ServerUtil::getDetailedInfo($args);
+			
+			// Fix the logo url if necessary
+			$arrayOut['logourl'] = UrlGeneratorUtil::getFullURL($request, $arrayOut['logourl']);
+			
 		} catch(Exception\HttpException $e) {
 			$httpStatus = $e->getStatusCode();
 			$message = $e->getMessage();
