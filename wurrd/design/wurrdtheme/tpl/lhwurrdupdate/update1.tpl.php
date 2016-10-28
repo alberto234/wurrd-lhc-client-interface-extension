@@ -20,13 +20,33 @@
 
 <img src="<?php echo erLhcoreClassDesign::design('images/general/logo.png');?>" alt="Live Helper Chat" title="Live Helper Chat" />
 
-<h1>Wurrd Client Interface Installation</h1>
+<h1>Wurrd Client Interface Update</h1>
+
+<form action="<?php echo erLhcoreClassDesign::baseurl('wurrd/update')?>/1" method="POST">
+
+<?php if (isset($errors)) : ?>
+	<?php include(erLhcoreClassDesign::designtpl('lhkernel/validation_error.tpl.php'));?>
+<?php endif; ?>
 
 <div class="panel">
-<p>Installation was previously completed. Nothing else to do.
-</p>
-
-<p>Click <a href="<?php echo erLhcoreClassDesign::baseurl('wurrd/clientinterface/serverinfo')?>">here for basic testing.</a>
-</p>
-<br>
+  <p>You will be prompted to walk through the update steps if there are any required</p>
 </div>
+
+<h2>Checking versions</h2>
+
+<table class="table">
+    <tr>
+        <td><h3>Installed version</h3></td>
+        <td><h3><?php echo $wci_installed_ver;?></h3></td>
+    </tr>
+    <tr>
+        <td><h3>Updating to version</h3></td>
+        <td><h3><span class="success-color"><?php echo $wci_new_version;?></span></h3></td>
+    </tr>
+</table>
+<br>
+
+<input type="submit" class="btn btn-default" value="Update" name="Update">
+<br /><br />
+
+</form>

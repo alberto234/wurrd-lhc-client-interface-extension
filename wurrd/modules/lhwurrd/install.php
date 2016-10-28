@@ -29,10 +29,6 @@ use Wurrd\ClientInterface\Constants;
 
 try {
 
-// - We need to check our config file here instead of the standard config.
-// - Given that we have have registered our class paths in bootstrap.php, we may
-// 	 be able to use our config here.
-
 $tpl = new erLhcoreClassTemplate( 'lhwurrdinstall/install1.tpl.php');
 
 $wciConfig = Config::getInstance();

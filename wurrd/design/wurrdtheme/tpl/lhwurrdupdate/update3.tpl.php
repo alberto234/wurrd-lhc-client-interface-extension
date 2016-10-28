@@ -1,6 +1,5 @@
 <?php
-
-/*
+ /*
  * This file is a part of Wurrd extension for LiveHelperChat.
  *
  * Copyright 2016 Eyong N <eyongn@scalior.com>.
@@ -17,27 +16,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-$Module = array( "name" => "Wurrd Client Interface module");
-
-$ViewList = array();
-
-$ViewList['clientinterface'] = array(
-    'params' => array()
-);
-
-$ViewList['install'] = array(
-    'script' => 'install.php',
-    'params' => array('step_id')
-);
-
-$ViewList['update'] = array(
-    'script' => 'update.php',
-    'params' => array('step_id')
-);
-
-
-$FunctionList = array();
-
-
 ?>
+
+<img src="<?php echo erLhcoreClassDesign::design('images/general/logo.png');?>" alt="Live Helper Chat" title="Live Helper Chat" />
+
+<h1>Wurrd Client Interface Update</h1>
+
+<div class="panel">
+<p>You already have the latest version of the extension (<b><span class="success-color"><?php echo $wci_installed_ver; ?></span></b>). Note that downgrades are not allowed.
+</p>
+
+<p>Click <a href="<?php echo erLhcoreClassDesign::baseurl('wurrd/clientinterface/serverinfo')?>">here for basic testing.</a>
+</p>
+<br>
+</div>

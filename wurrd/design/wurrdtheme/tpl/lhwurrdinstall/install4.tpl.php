@@ -20,12 +20,13 @@
 
 <img src="<?php echo erLhcoreClassDesign::design('images/general/logo.png');?>" alt="Live Helper Chat" title="Live Helper Chat" />
 
-<h1>Wurrd Client Interface Installation was completed</h1>
+<h1>Wurrd Client Interface Installation</h1>
 
 <div class="panel">
 <p>Installation is complete. You can now start using the wurrd app.
+</p>
 
-Click <a href="<?php echo erLhcoreClassDesign::baseurl('wurrd/clientinterface/serverinfo')?>">here for basic testing.</a>
+<p>Click <a href="<?php echo erLhcoreClassDesign::baseurl('wurrd/clientinterface/serverinfo')?>">here for basic testing.</a>
 </p>
 <br>
 </div>
