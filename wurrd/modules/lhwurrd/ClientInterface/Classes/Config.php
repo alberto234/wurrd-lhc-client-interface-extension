@@ -113,7 +113,7 @@ class Config
     		return false;
     	}
 
-        file_put_contents($this->settingsFile, "<?php\n return ".var_export($this->conf,true).";\n?>");
+        return file_put_contents($this->settingsFile, "<?php\n return ".var_export($this->conf,true).";\n?>");
     }
 }
 

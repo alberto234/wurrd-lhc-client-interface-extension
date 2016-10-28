@@ -123,7 +123,7 @@ switch ((int)$Params['user_parameters']['step_id']) {
 				$installationId = strtr(base64_encode(hash("sha256", time(), true)), '/', '-');
 								
 				// Create the wurrd client interface config array
-				$wciConfig = array (
+				$wciConfigArray = array (
 						  'settings' => 
 						  array (
 						    'general' => 
@@ -135,93 +135,98 @@ switch ((int)$Params['user_parameters']['step_id']) {
 						  ),
 						);
 						
-			  // Write the config file.
-			 $success = file_put_contents($WCI_SETTINGS_FILE, "<?php\n return ".var_export($wciConfig,true).";\n?>");
-			  			  
-
-    	       /*DATABASE TABLES SETUP*/
-    	       // Note that $db below is a PDO object
-    	       
-    	       // Fresh install for this version
-    	       // On upgrade we have to handle database upgrades.
-    	       $db = ezcDbInstance::get();
-			   $db->beginTransaction();
-			   try {
-	        	  $db->query("CREATE TABLE IF NOT EXISTS `waa_device` (
-					  `id` int(11) NOT NULL AUTO_INCREMENT,
-					  `deviceuuid` varchar(1024) NOT NULL,
-					  `platform` varchar(64),
-					  `type` varchar(64),
-					  `name` varchar(256),
-					  `os` varchar(64),
-					  `osversion` varchar(32),
-					  `dtmcreated` int NOT NULL DEFAULT 0,
-					  `dtmmodified` int NOT NULL DEFAULT 0,
-					  PRIMARY KEY (`id`),
-					  KEY `idx_device` (`deviceuuid`(256),`platform`)
-					) DEFAULT CHARSET=utf8;");
-	
-	        	   $db->query("CREATE TABLE IF NOT EXISTS `waa_authorization` (
-	                  `authid` int(11) NOT NULL AUTO_INCREMENT,
-	                  `operatorid` int(11) NOT NULL,
-	                  `deviceid` int(11) NOT NULL,
-	                  `clientid` varchar(256),
-	                  `dtmcreated` int(11) NOT NULL DEFAULT 0,
-	                  `dtmmodified` int(11) NOT NULL DEFAULT 0,
-	                  `accesstoken` varchar(256),
-	                  `dtmaccesscreated` int(11) NOT NULL,
-	                  `dtmaccessexpires` int(11) NOT NULL,
-	                  `refreshtoken` varchar(256),
-	                  `dtmrefreshcreated` int(11) NOT NULL,
-	                  `dtmrefreshexpires` int(11) NOT NULL,
-	                  `previousaccesstoken` varchar(256),
-	                  `previousrefreshtoken` varchar(256),
-	                  PRIMARY KEY (`authid`),
-	                  KEY `idx_accesstoken` (`accesstoken`),
-	                  KEY `idx_refreshtoken` (`refreshtoken`),
-	                  KEY `idx_deviceid` (`deviceid`),
-	                  KEY `idx_previousaccesstoken` (`previousaccesstoken`)
-	                ) DEFAULT CHARSET=utf8;");
-	
-	                // The revision table
-	        	   $db->query("CREATE TABLE IF NOT EXISTS `wci_revision` (
-	                  `id` int(11) NOT NULL
-	                ) DEFAULT CHARSET=utf8;");
-	                
-	               // chat_extension - A table to extend columns of the chat table without
-	               // 				modifying the core
-	        	   $db->query("CREATE TABLE IF NOT EXISTS `wci_chat_extension` (
-					  `id` int(11) NOT NULL AUTO_INCREMENT,
-					  `chatid` int(11) NOT NULL,
-					  `revision` int(11) NOT NULL,
-					  PRIMARY KEY (`id`)
-					) DEFAULT CHARSET=utf8;");
-
-	                // Give the revision a default value of 0
-	                $db->query("INSERT INTO `wci_revision` values (0);");
-	                
-										
-					// Create or update the version info in the lh_chat_config table
+				$wciConfig->setConfig($wciConfigArray);
+			    $success = $wciConfig->save();
+				if ($success == true) {
 					
-					$results = $db->query("SELECT * FROM `lh_chat_config` 
-											WHERE `identifier` = '" . Constants::WCI_VERSION_KEY ."'")->fetchAll();
-					if (count($results) == 0) {
-						$db->query("INSERT INTO `lh_chat_config` 
-							(`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('" .
-							Constants::WCI_VERSION_KEY . "','" .Constants::WCI_VERSION . "',0, 'Wurrd client interface vesion', 0)");
-					} else {
-						$db->query("UPDATE `lh_chat_config` SET `value` = '" . Constants::WCI_VERSION . "'
-							WHERE `identifier` = '" . Constants::WCI_VERSION_KEY . "'");
-					}
-			   		$db->commit();
-			   		
-    		       $tpl->setFile('lhwurrdinstall/install4.tpl.php');
-			   } catch (Exception $ex) {
-			   		$db->rollback();
-				   $Errors[] = "An error occurred when creating the database tables: " . $ex->getMessage();
+	    	       /*DATABASE TABLES SETUP*/
+	    	       // Note that $db below is a PDO object
+	    	       
+	    	       // Fresh install for this version
+	    	       // On upgrade we have to handle database upgrades.
+	    	       $db = ezcDbInstance::get();
+				   $db->beginTransaction();
+				   try {
+		        	  $db->query("CREATE TABLE IF NOT EXISTS `waa_device` (
+						  `id` int(11) NOT NULL AUTO_INCREMENT,
+						  `deviceuuid` varchar(1024) NOT NULL,
+						  `platform` varchar(64),
+						  `type` varchar(64),
+						  `name` varchar(256),
+						  `os` varchar(64),
+						  `osversion` varchar(32),
+						  `dtmcreated` int NOT NULL DEFAULT 0,
+						  `dtmmodified` int NOT NULL DEFAULT 0,
+						  PRIMARY KEY (`id`),
+						  KEY `idx_device` (`deviceuuid`(256),`platform`)
+						) DEFAULT CHARSET=utf8;");
+		
+		        	   $db->query("CREATE TABLE IF NOT EXISTS `waa_authorization` (
+		                  `authid` int(11) NOT NULL AUTO_INCREMENT,
+		                  `operatorid` int(11) NOT NULL,
+		                  `deviceid` int(11) NOT NULL,
+		                  `clientid` varchar(256),
+		                  `dtmcreated` int(11) NOT NULL DEFAULT 0,
+		                  `dtmmodified` int(11) NOT NULL DEFAULT 0,
+		                  `accesstoken` varchar(256),
+		                  `dtmaccesscreated` int(11) NOT NULL,
+		                  `dtmaccessexpires` int(11) NOT NULL,
+		                  `refreshtoken` varchar(256),
+		                  `dtmrefreshcreated` int(11) NOT NULL,
+		                  `dtmrefreshexpires` int(11) NOT NULL,
+		                  `previousaccesstoken` varchar(256),
+		                  `previousrefreshtoken` varchar(256),
+		                  PRIMARY KEY (`authid`),
+		                  KEY `idx_accesstoken` (`accesstoken`),
+		                  KEY `idx_refreshtoken` (`refreshtoken`),
+		                  KEY `idx_deviceid` (`deviceid`),
+		                  KEY `idx_previousaccesstoken` (`previousaccesstoken`)
+		                ) DEFAULT CHARSET=utf8;");
+		
+		                // The revision table
+		        	   $db->query("CREATE TABLE IF NOT EXISTS `wci_revision` (
+		                  `id` int(11) NOT NULL
+		                ) DEFAULT CHARSET=utf8;");
+		                
+		               // chat_extension - A table to extend columns of the chat table without
+		               // 				modifying the core
+		        	   $db->query("CREATE TABLE IF NOT EXISTS `wci_chat_extension` (
+						  `id` int(11) NOT NULL AUTO_INCREMENT,
+						  `chatid` int(11) NOT NULL,
+						  `revision` int(11) NOT NULL,
+						  PRIMARY KEY (`id`)
+						) DEFAULT CHARSET=utf8;");
+	
+		                // Give the revision a default value of 0
+		                $db->query("INSERT INTO `wci_revision` values (0);");
+		                
+											
+						// Create or update the version info in the lh_chat_config table
+						
+						$results = $db->query("SELECT * FROM `lh_chat_config` 
+												WHERE `identifier` = '" . Constants::WCI_VERSION_KEY ."'")->fetchAll();
+						if (count($results) == 0) {
+							$db->query("INSERT INTO `lh_chat_config` 
+								(`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('" .
+								Constants::WCI_VERSION_KEY . "','" .Constants::WCI_VERSION . "',0, 'Wurrd client interface vesion', 0)");
+						} else {
+							$db->query("UPDATE `lh_chat_config` SET `value` = '" . Constants::WCI_VERSION . "'
+								WHERE `identifier` = '" . Constants::WCI_VERSION_KEY . "'");
+						}
+				   		$db->commit();
+				   		
+	    		       $tpl->setFile('lhwurrdinstall/install4.tpl.php');
+				   } catch (Exception $ex) {
+				   		$db->rollback();
+					   $Errors[] = "An error occurred when creating the database tables: " . $ex->getMessage();
+		    	       $tpl->set('errors',$Errors);
+		    	       $tpl->setFile('lhwurrdinstall/install3.tpl.php');
+				   }
+				} else {
+					$Errors[] = "Error saving the configuration file";
 	    	       $tpl->set('errors',$Errors);
 	    	       $tpl->setFile('lhwurrdinstall/install3.tpl.php');
-			   }
+				}
             } else {
 
                if ( $form->hasValidData( 'AdminEmail' ) ) $tpl->set('admin_email',$form->AdminEmail);
