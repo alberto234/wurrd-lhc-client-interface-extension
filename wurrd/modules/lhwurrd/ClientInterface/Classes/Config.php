@@ -115,6 +115,19 @@ class Config
 
         return file_put_contents($this->settingsFile, "<?php\n return ".var_export($this->conf,true).";\n?>");
     }
+	
+	public function deleteFile() {
+    	if (!$this->isValid()) {
+    		return true;	// File doesn't exist so return true
+    	}
+		
+		$success = unlink($this->settingsFile);
+		if ($success) {
+			$this->conf = null;
+		}
+		
+		return $success;
+	}
 }
 
 

@@ -37,7 +37,7 @@
         <td>Force use of POST <br />
         	<i>Only enable this if you have a problem</i>
         </td>
-        <td><input class="form-control" type="checkbox" name="UsePost" value="true" <?php if (isset($use_post) && $use_post) echo 'checked'; ?>"></td>
+        <td><input class="form-control" type="checkbox" name="UsePost" value="true" <?php if (isset($use_post) && $use_post) echo 'checked'; ?> ></td>
     </tr>
 </table>
 <br>

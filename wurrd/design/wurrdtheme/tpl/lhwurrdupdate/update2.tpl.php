@@ -20,7 +20,7 @@
 
 <img src="<?php echo erLhcoreClassDesign::design('images/general/logo.png');?>" alt="Live Helper Chat" title="Live Helper Chat" />
 
-<h1>Wurrd Client Interface Update</h1>
+<h1>Wurrd Client Interface Update Complete</h1>
 
 <div class="panel">
 <p>Update is complete. You are now using version <b><span class="success-color"><?php echo $wci_new_version; ?></span></b>.

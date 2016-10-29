@@ -2,6 +2,12 @@
 Issues tracked in GitHub repository https://github.com/alberto234/wurrd-lhc-client-interface-extension/issues
 
 
+1.0.2  - 2016-10-28
+===================
+- Exposed company name and logo. These values now come from the default widget theme. Previously these were hard-coded (Github issue 5)
+- Added update and uninstallation processes to installation script (Github issue 2)
+
+
 1.0.1  - 2016-10-12
 ===================
 - Downgraded minimum requirement to PHP 5.3 from PHP 5.5. LiveHelperChat requires PHP 5.4. (Github issue 1)

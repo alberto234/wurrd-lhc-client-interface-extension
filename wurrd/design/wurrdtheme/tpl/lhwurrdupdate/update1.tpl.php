@@ -20,7 +20,7 @@
 
 <img src="<?php echo erLhcoreClassDesign::design('images/general/logo.png');?>" alt="Live Helper Chat" title="Live Helper Chat" />
 
-<h1>Wurrd Client Interface Update</h1>
+<h1>Wurrd Client Interface Update Step 1</h1>
 
 <form action="<?php echo erLhcoreClassDesign::baseurl('wurrd/update')?>/1" method="POST">
 

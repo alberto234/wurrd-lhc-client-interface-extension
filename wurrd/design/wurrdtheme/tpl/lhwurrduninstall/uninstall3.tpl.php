@@ -20,17 +20,18 @@
 
 <img src="<?php echo erLhcoreClassDesign::design('images/general/logo.png');?>" alt="Live Helper Chat" title="Live Helper Chat" />
 
-<h1>Wurrd Client Interface Update Complete</h1>
+<h1>Wurrd Client Interface Uninstall Complete</h1>
 
 <?php if (isset($errors)) : ?>
 	<?php include(erLhcoreClassDesign::designtpl('lhkernel/validation_error.tpl.php'));?>
 <?php endif; ?>
 
 <div class="panel">
-<p>You already have the latest version of the extension (<b><span class="success-color"><?php echo $wci_installed_ver; ?></span></b>). Note that downgrades are not allowed.
-</p>
 
-<p>Click <a href="<?php echo erLhcoreClassDesign::baseurl('wurrd/clientinterface/serverinfo')?>">here for basic testing.</a>
+<p>Thank you for giving the Wurrd app a shot. We would like to know why the app didn't work out for you. Please drop us a note at 
+	<a href="mailto:info@wurrdapp.com?subject=Feedback from LHC">info@wurrdapp.com</a></p>
+
+<p>If you wish to install the extension again, click <a href="<?php echo erLhcoreClassDesign::baseurl('wurrd/install')?>">here.</a>
 </p>
 <br>
 </div>

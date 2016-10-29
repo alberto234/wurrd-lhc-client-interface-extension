@@ -20,17 +20,26 @@
 
 <img src="<?php echo erLhcoreClassDesign::design('images/general/logo.png');?>" alt="Live Helper Chat" title="Live Helper Chat" />
 
-<h1>Wurrd Client Interface Update Complete</h1>
+<form action="<?php echo erLhcoreClassDesign::baseurl('wurrd/uninstall')?>/2" method="post" autocomplete="off" >
+<h1>Wurrd Client Interface Uninstallation Step 2</h1>
 
 <?php if (isset($errors)) : ?>
 	<?php include(erLhcoreClassDesign::designtpl('lhkernel/validation_error.tpl.php'));?>
 <?php endif; ?>
 
-<div class="panel">
-<p>You already have the latest version of the extension (<b><span class="success-color"><?php echo $wci_installed_ver; ?></span></b>). Note that downgrades are not allowed.
-</p>
+<h2>Confirm uninistall</h2>
 
-<p>Click <a href="<?php echo erLhcoreClassDesign::baseurl('wurrd/clientinterface/serverinfo')?>">here for basic testing.</a>
-</p>
+<p>This will remove all the entries in the database. You will have to manually disable the extension and remove wurrd from the extension directory</p>
+
+<table class="table">
+    <tr>
+        <td>Do you really want to uninstall the extension?
+        </td>
+        <td><input class="form-control" type="checkbox" name="UninstalExtension" value="true"></td>
+    </tr>
+</table>
 <br>
-</div>
+<input type="submit" class="btn btn-default" value="Uninstall" name="Uninstall">
+<br /><br />
+
+</form>

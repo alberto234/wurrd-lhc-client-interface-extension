@@ -36,6 +36,11 @@ $ViewList['update'] = array(
     'params' => array('step_id')
 );
 
+$ViewList['uninstall'] = array(
+    'script' => 'uninstall.php',
+    'params' => array('step_id')
+);
+
 
 $FunctionList = array();
 
