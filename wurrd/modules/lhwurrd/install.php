@@ -31,6 +31,16 @@ try {
 
 $tpl = new erLhcoreClassTemplate( 'lhwurrdinstall/install1.tpl.php');
 
+$currentUser = erLhcoreClassUser::instance();
+if (!$currentUser->isLogged()){    	
+    $tpl->setFile('lhwurrdinstall/notloggedin.tpl.php');
+	$Result['content'] = $tpl->fetch();
+	$Result['pagelayout'] = 'install';
+	$Result['path'] = array(array('title' => 'Wurrd client interface installation'));
+	return $Result;
+
+    exit;
+}
 $wciConfig = Config::getInstance();
 
 if ($wciConfig->isValid())
