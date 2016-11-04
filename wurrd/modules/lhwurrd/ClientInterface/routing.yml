@@ -94,7 +94,8 @@ wurrd_client_operator_close_chat:
 # containing the following fields: 
 #   - threadid
 #   - lastid
-# e.g {"threads" : [{"threadid":2, "lastid":23}, {"threadid":3, "lastid":95}]}
+#   - lastfootprintid
+# e.g {"threads" : [{"threadid":2, "lastid":23, "lastfootprintid":25}, {"threadid":3, "lastid":95}]}
 # Q: What is the return?
 #
 # Expects HTTP Header X-Auth-Token = <deviceuuid>:<accesstoken>

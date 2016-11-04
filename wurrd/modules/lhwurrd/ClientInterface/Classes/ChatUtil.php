@@ -117,8 +117,8 @@ class ChatUtil extends  \erLhcoreClassChat
     /**
      * Gets new messages for the threads supplied
      *
-     * @param Array $requestThreads Threads that we are interested in.
-     * @return Array of messages for each of the supplied threads
+     * @param array $requestThreads Threads that we are interested in.
+     * @return array of messages for each of the supplied threads
      */
     public static function updateMessages($requestThreads)
 	{
@@ -175,10 +175,20 @@ class ChatUtil extends  \erLhcoreClassChat
 					$messagesArray[] = $wurrdMessage;
 				}
 
+				// Get any new footprint records...
+				$newLastFootPrintId = null;
+				$visitorFootPrint = self::getFootPrint($chat, $requestThread['lastfootprintid'], $newLastFootPrintId);
+
+
 				$chatMessages = array();
 				$chatMessages['threadid'] = (int)$chatId;
 				$chatMessages['lastid'] = (int)$newLastId;
 				$chatMessages['messages'] = $messagesArray;
+				if ($visitorFootPrint !== null) {
+					$chatMessages['lastfootprintid'] = (int)$newLastFootPrintId;
+					$chatMessages['footprint'] = $visitorFootPrint;
+				}
+
 				$threadMessages[] = $chatMessages;
 			} else {
 				// Log that chat wasn't found
@@ -427,7 +437,56 @@ class ChatUtil extends  \erLhcoreClassChat
 		
 		return $wurrdChatStatus;
 	 }
-	 
+
+
+	/**
+	 * Helper method get the most recent footprint for the current visitor
+	 *
+	 * We assume that user has access to chat
+	 */
+	public static function getFootPrint($chat, $minFootPrintId, &$lastFootPrintId) {
+		if ($minFootPrintId === null) {
+			return null;
+		}
+
+		$visitorFootPrint = null;
+
+		$trackFootPrint = \erLhcoreClassModelChatConfig::fetch('track_online_visitors')->current_value == 1 &&
+			\erLhcoreClassModelChatConfig::fetch('track_footprint')->current_value == 1;
+		if ($trackFootPrint) {
+
+			$filter = array();
+			$filter['limit'] = 100;
+			$filter['offset'] = 0;
+			$filter['smart_select'] = true;
+			$filter['filter'] = array('chat_id' => (int)$chat->id);
+			$filter['filtergt'] = array('id' => (int)$minFootPrintId);
+
+			$footPrintList = \erLhcoreClassModelChatOnlineUserFootprint::getList($filter);
+
+			// vtime is a varchar, so how efficient is it to use in a query?
+			// This filter will only exhibit itself when the $minFootPrintId is 0 for the first call.
+			// Subsequent calls will have min id set correctly, so no need to filter
+
+			$visitorFootPrint = array();
+			$lastFootPrintId = $minFootPrintId;
+			foreach($footPrintList as $footPrint) {
+				if ((int)$footPrint->vtime >= $chat->time) {
+					$visitorFootPrint[] = array('footprintid' => $footPrint->id,
+												'page' => $footPrint->page,
+												'time' => (int)$footPrint->vtime,
+												);
+
+					if ($footPrint->id > $lastFootPrintId) {
+						$lastFootPrintId = $footPrint->id;
+					}
+				}
+			}
+
+			return $visitorFootPrint;
+		}
+	}
+
 	 
 	 /**
 	  * Helper method to set the operator's typing status.
