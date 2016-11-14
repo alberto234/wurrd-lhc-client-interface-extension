@@ -14,7 +14,7 @@ Full install and update instructions with pictures can be found on the [Wurrd we
 1. Get the built archive for this extension from [here](http://wurrdapp.com/get-it-now).
 1. Untar/unzip the extension's archive.
 1. Copy the entire directory structure for the extension into the `<LHC root>/extension`  folder.
-1. Activate the extension by adding wurrd to the extension array in "`<LHC Base URL>`/settings/settings.ini.php" (e.g. array (0 => 'wurrd')).
+1. Activate the extension by adding wurrd to the extension array in "`<LHC root>`/settings/settings.ini.php" (e.g. array (0 => 'wurrd')).
 1. Navigate to "`<LHC Base URL>`/index.php/wurrd/install" and follow the steps to complete the installation.
 1. Click 'basic test' at the end of the installation to confirm that the installation was successful. You should see the following text:
 
