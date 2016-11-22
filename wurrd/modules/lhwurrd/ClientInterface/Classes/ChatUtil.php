@@ -186,7 +186,7 @@ class ChatUtil extends  \erLhcoreClassChat
 				$chatMessages['messages'] = $messagesArray;
 				if ($visitorFootPrint !== null) {
 					$chatMessages['lastfootprintid'] = (int)$newLastFootPrintId;
-					$chatMessages['footprint'] = $visitorFootPrint;
+					$chatMessages['footprints'] = $visitorFootPrint;
 				}
 
 				$threadMessages[] = $chatMessages;

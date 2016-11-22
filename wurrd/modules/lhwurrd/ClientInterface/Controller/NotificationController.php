@@ -136,6 +136,9 @@ class NotificationController extends AbstractController
 				$temp = array();
 				$temp['threadid'] = $threadMessage['threadid'];
 				$temp['lastid'] = $threadMessage['lastid'];
+				if ($threadMessage['lastfootprintid'] != null) {
+					$temp['lastfootprintid'] = $threadMessage['lastfootprintid'];
+				}
 				$output[] = $temp;
 			}
 			
