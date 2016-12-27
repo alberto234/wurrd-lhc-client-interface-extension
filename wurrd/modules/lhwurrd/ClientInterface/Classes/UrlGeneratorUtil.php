@@ -27,12 +27,56 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class UrlGeneratorUtil
 {
+
+
+	private static $instance = null;
+	private $request;
+
+	public static function constructInstance(Request $request) {
+		if ( is_null( self::$instance ) )
+		{
+			self::$instance = new self($request);
+		}
+		return self::$instance;
+	}
+
+	public static function getInstance() {
+		return self::$instance;
+	}
+
 	/**
-     * Generates the full URL based on the input URL including the scheme and host
-	 * 
+	 * Generates the full URL based on the input URL including the scheme and host
+	 *
 	 * @param Request $request - The Symfony request object
 	 * @param string $urPath - The url path to be resolved
-	 *  
+	 *
+	 * @return array|bool  An array with the server details or false if a failure
+	 */
+	public function fullURL($urlPath) {
+		$fullURL = $urlPath;
+		if (!is_null($this->request)) {
+			// Fix the url if necessary
+			if (strpos($urlPath, '://') === false) {
+				// For now we assume that if the scheme wasn't provided then
+				// the URL is relative from the root of the domain.
+				$fullURL = $this->request->getSchemeAndHttpHost() . $urlPath;
+			}
+
+			return $fullURL;
+		}
+	}
+
+
+	private function __construct(Request $request) {
+		$this->request = $request;
+	}
+
+	/**
+	 * Static method that generates the full URL based on the input URL including the scheme and host
+	 *
+	 * @param Request $request - The Symfony request object
+	 * @param string $urPath - The url path to be resolved
+	 *
 	 * @return array|bool  An array with the server details or false if a failure
 	 */
 	public static function getFullURL(Request $request, $urlPath) {
@@ -45,8 +89,10 @@ class UrlGeneratorUtil
 			// the URL is relative from the root of the domain.
 			$fullURL = $request->getSchemeAndHttpHost() . $urlPath;
 		}
-		
+
 		return $fullURL;
 	}
+
+
 }
 

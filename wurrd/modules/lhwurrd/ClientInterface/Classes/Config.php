@@ -33,7 +33,7 @@ class Config
     public $conf;
 	private $settingsFile;
 
-    public function __construct()
+    private function __construct()
     {
 		$this->settingsFile = __DIR__ . '/../settings.ini.php';
 		$this->reload();

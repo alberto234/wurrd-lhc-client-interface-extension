@@ -22,6 +22,7 @@ namespace Wurrd\ClientInterface\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Wurrd\ClientInterface\Classes\UrlGeneratorUtil;
 use Wurrd\ClientInterface\Constants;
 use Wurrd\Http\Exception;
 
@@ -42,6 +43,7 @@ abstract class AbstractController {
 	 * @throws \Wurrd\Http\Exception\AccessDeniedException
 	 */
 	protected function getXAuthToken(Request $request) {
+		$this->init($request);
 		$xauthToken = array();
 		
 		$tmp = $request->headers->get('x-auth-token');
@@ -54,7 +56,12 @@ abstract class AbstractController {
 		
 		// If we get here, something went wrong
 		throw new Exception\AccessDeniedException(Constants::MSG_INVALID_ACCESS_TOKEN);
-	}	
+	}
+
+	protected function init(Request $request) {
+		// Construct the UrlGeneratorUtil singleton
+		UrlGeneratorUtil::constructInstance($request);
+	}
 }
 
 ?>

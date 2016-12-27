@@ -57,30 +57,24 @@ class ChatUtil extends  \erLhcoreClassChat
 		}
     	
 
-    	$filter = array();
-    	// $filter['filter'] = array('status' => 1);
+		$customFilters = array();
 
     	if ($limitation !== true) {
-    		$filter['customfilter'][] = $limitation;
-    		$filter['use_index'] = 'status_dep_id_id';
+    		$customFilters[] = $limitation;
     	}
 
-    	$filter['limit'] = 100;
-    	$filter['offset'] = 0;
-    	$filter['smart_select'] = true;
-		
+		$statusArray = array();
 		if ($requestRevision == 0) {
 			// Client doesn't have any record of previous chats. 
 			// Filter out closed chats
 			
 			// In the array we are below defining, the keys are not used.
-	    	$filter['filterin']['status'] = array('pending' => \erLhcoreClassModelChat::STATUS_PENDING_CHAT,
-												  'active' 	=> \erLhcoreClassModelChat::STATUS_ACTIVE_CHAT);
+			$statusArray = array('pending' => \erLhcoreClassModelChat::STATUS_PENDING_CHAT,
+								'active' 	=> \erLhcoreClassModelChat::STATUS_ACTIVE_CHAT);
 		}
 		
 		// Add an "IN" filter for the candidate threads that we are looking at.
 		$chatIds = array();
-		$first = true;
 		foreach($canditateChats as $oneCandidate) {
 			$chatIds[] = $oneCandidate->chatid;
 			if ($newRevision < $oneCandidate->revision) {
@@ -88,24 +82,34 @@ class ChatUtil extends  \erLhcoreClassChat
 			}
 		}
 
-		$filter['filterin']['id'] = $chatIds;
+		$tempThreads = self::internalGetUpdatedThreadList($chatIds, $statusArray, $customFilters /*, $useIndex */);
 
-    	$tempThreads = self::getList($filter);
-		
-		// We now want to filter out unneeded columns.
-		// Ideally we should accomplish this in the query
+		// We now do column translation.
 		$updatedThreads = array();
 		foreach($tempThreads as $oneThread) {
 			$oneUpdatedThread = array();
-			$oneUpdatedThread['id'] 			= $oneThread->id;
-			$oneUpdatedThread['userName'] 		= $oneThread->nick;
-			$oneUpdatedThread['remote'] 		= $oneThread->ip;
-			$oneUpdatedThread['agentId'] 		= $oneThread->user_id;
-			$oneUpdatedThread['state'] 			= self::convertToWurrdChatState($oneThread->status);
-			$oneUpdatedThread['totalTime'] 		= $oneThread->time;
-			$oneUpdatedThread['locale']			= $oneThread->chat_locale;
-			$oneUpdatedThread['groupid'] 		= $oneThread->dep_id;
-			
+			$oneUpdatedThread['id'] 			= $oneThread['id'];
+			$oneUpdatedThread['userName'] 		= $oneThread['nick'];
+			$oneUpdatedThread['remote'] 		= $oneThread['ip'];
+			$oneUpdatedThread['agentId'] 		= $oneThread['user_id'];
+			$oneUpdatedThread['state'] 			= self::convertToWurrdChatState($oneThread['status']);
+			$oneUpdatedThread['totalTime'] 		= $oneThread['time'];
+			$oneUpdatedThread['locale']			= $oneThread['chat_locale'];
+			$oneUpdatedThread['groupid'] 		= $oneThread['dep_id'];
+
+			$oneUpdatedThread['email'] 			= $oneThread['email'];
+			$oneUpdatedThread['phone'] 			= $oneThread['phone'];
+			$oneUpdatedThread['countryCode'] 	= $oneThread['country_code'];
+			$oneUpdatedThread['countryName'] 	= $oneThread['country_name'];
+			$oneUpdatedThread['latitude'] 		= $oneThread['lat'];
+			$oneUpdatedThread['longitude'] 		= $oneThread['lon'];
+			$oneUpdatedThread['referrer'] 		= $oneThread['referrer'];
+			$oneUpdatedThread['sessionReferrer'] = $oneThread['session_referrer'];
+
+			if (isset($oneUpdatedThread['countryCode']) && strlen($oneUpdatedThread['countryCode']) > 0) {
+				$oneUpdatedThread['flagUrl'] 	= UrlGeneratorUtil::getInstance()->fullUrl(\erLhcoreClassDesign::design('images/flags') . '/' . $oneUpdatedThread['countryCode'] . '.png');
+			}
+
 			$updatedThreads[] = $oneUpdatedThread;
 		}
 
@@ -522,5 +526,69 @@ class ChatUtil extends  \erLhcoreClassChat
 	    
 	    $stmt->execute();             
 	 }
+
+	/**
+	 * Helper method to get the update threads list
+	 *
+	 * We assume that user has access to chat
+	 */
+	private static function internalGetUpdatedThreadList($chatIds, $statusArray, $customFilters /*, $useIndex*/) {
+		$results = array();
+		if ($chatIds === null || count($chatIds) == 0) {
+			return $results;
+		}
+
+		try {
+			$db = \ezcDbInstance::get();
+			$q = $db->createSelectQuery();
+
+			$q->select('lh_chat.id, nick, lh_chat.ip, user_id, status, time, chat_locale, lh_chat.dep_id, email, phone,
+						country_code, country_name, lh_chat.lat, lh_chat.lon, lh_chat.referrer, lh_chat.session_referrer ');
+			$q->from('lh_chat');
+			$q->leftJoin('lh_chat_online_user', $q->expr->eq('lh_chat.id', 'lh_chat_online_user.chat_id'));
+
+			// Filters...
+			$conditions = array();
+
+			// ... by chat id
+			$conditions[] = $q->expr->in('lh_chat.id', $chatIds);
+
+			// ... by status
+			if ($statusArray !== null && count($statusArray) > 0) {
+				$conditions[] = $q->expr->in('status', $statusArray);
+			}
+
+			// ... custom filters?
+			if (isset($customFilters) && count($customFilters) > 0)
+			{
+				foreach ($customFilters as $fieldValue)
+				{
+					$conditions[] = $fieldValue;
+				}
+			}
+
+			$q->where($conditions);
+
+			// ... use index?
+			// The index hint doesn't make sense with the join
+			// Some more research is needed to make it work right.
+			/*if (isset($useIndex)) {
+				$q->useIndex( $useIndex );
+			}*/
+
+			$q->orderBy('lh_chat.id DESC');
+
+
+			$stmt = $q->prepare();
+			$stmt->execute();
+
+			$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		} catch (\Exception $exception) {
+			error_log('Exception:  ' . $exception->getMessage());
+		}
+
+		return $results;
+	}
+
 }
 
