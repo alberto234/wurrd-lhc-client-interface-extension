@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="abb1ce29-42cc-4c4d-b00d-0e94310aeb82" name="Default" comment="Issue #4: Exposing visitor breadcrumb">
+    <list default="true" id="abb1ce29-42cc-4c4d-b00d-0e94310aeb82" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/ChatUtil.php" afterPath="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/ChatUtil.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/Config.php" afterPath="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/Config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/UrlGeneratorUtil.php" afterPath="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/UrlGeneratorUtil.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Constants.php" afterPath="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Constants.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Controller/AbstractController.php" afterPath="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Controller/AbstractController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/lhwurrd/update.php" afterPath="$PROJECT_DIR$/modules/lhwurrd/update.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Model/Authorization.php" afterPath="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Model/Authorization.php" />
     </list>
     <ignored path="wurrd.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,14 +24,55 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ChatUtil.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ChatUtil.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/ChatUtil.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state relative-caret-position="315">
+              <caret line="40" column="7" selection-start-line="40" selection-start-column="7" selection-end-line="40" selection-end-column="7" />
               <folding>
+                <element signature="e#731#777#0#PHP" expanded="true" />
                 <marker date="1482805127000" expanded="true" signature="17199:17309" ph="UPDATE lh_ch... " />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AccessManagerAPI.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/AccessManagerAPI.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-570">
+              <caret line="197" column="53" selection-start-line="197" selection-start-column="53" selection-end-line="197" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Authorization.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Model/Authorization.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="233" column="57" selection-start-line="233" selection-start-column="57" selection-end-line="233" selection-end-column="57" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Constants.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Constants.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="495">
+              <caret line="49" column="33" selection-start-line="49" selection-start-column="10" selection-end-line="49" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routing.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/routing.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1455">
+              <caret line="97" column="64" selection-start-line="97" selection-start-column="49" selection-end-line="97" selection-end-column="64" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -45,18 +80,8 @@
       <file leaf-file-name="UrlGeneratorUtil.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/UrlGeneratorUtil.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
+            <state relative-caret-position="570">
               <caret line="54" column="27" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Config.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/Config.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1380">
-              <caret line="108" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -94,41 +119,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="online_user_info.tpl.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../../../livehelperchat/lhc_web/design/defaulttheme/tpl/lhchat/chat_tabs/online_user_info.tpl.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="127" selection-start-line="22" selection-start-column="84" selection-end-line="22" selection-end-column="127" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="UsersController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Controller/UsersController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="600">
               <caret line="63" column="53" selection-start-line="63" selection-start-column="53" selection-end-line="63" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UsersUtil.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/UsersUtil.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="56" column="40" selection-start-line="56" selection-start-column="40" selection-end-line="56" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OperatorUtil.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/OperatorUtil.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -152,6 +147,7 @@
         <option value="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/UrlGeneratorUtil.php" />
         <option value="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Controller/AbstractController.php" />
         <option value="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/ChatUtil.php" />
+        <option value="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Model/Authorization.php" />
       </list>
     </option>
   </component>
@@ -173,7 +169,7 @@
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1280" />
-    <option name="height" value="724" />
+    <option name="height" value="722" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -200,6 +196,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -339,15 +337,9 @@
               <option name="myItemId" value="WurrdLHC_CI" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lhc_web" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -433,7 +425,11 @@
       <workItem from="1482797157271" duration="1818000" />
       <workItem from="1482799265235" duration="1918000" />
       <workItem from="1482801386848" duration="1882000" />
-      <workItem from="1482804146725" duration="1020000" />
+      <workItem from="1482804146725" duration="2050000" />
+      <workItem from="1482861403995" duration="653000" />
+      <workItem from="1482865745511" duration="937000" />
+      <workItem from="1482873804104" duration="477000" />
+      <workItem from="1482910919253" duration="536000" />
     </task>
     <task id="LOCAL-00001" summary="Issue #4: Exposing visitor breadcrumb">
       <created>1478259053702</created>
@@ -456,23 +452,29 @@
       <option name="project" value="LOCAL" />
       <updated>1480998255619</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Issue #10: Exposing additional information about a chat session">
+      <created>1482805763938</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1482805763938</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30175000" />
+    <option name="totallyTimeSpent" value="33808000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="724" extended-state="6" />
+    <frame x="0" y="23" width="1280" height="722" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2671875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32519084" sideWeight="0.534375" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32465544" sideWeight="0.5375" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32519084" sideWeight="0.465625" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3271605" sideWeight="0.48125" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11640625" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -482,6 +484,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32465544" sideWeight="0.4625" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15725191" sideWeight="0.68671876" order="1" side_tool="false" content_ui="tabs" />
@@ -502,7 +505,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Issue #4: Exposing visitor breadcrumb" />
-    <option name="LAST_COMMIT_MESSAGE" value="Issue #4: Exposing visitor breadcrumb" />
+    <MESSAGE value="Issue #10: Exposing additional information about a chat session" />
+    <option name="LAST_COMMIT_MESSAGE" value="Issue #10: Exposing additional information about a chat session" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -517,59 +521,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Constants.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../livehelperchat/lhc_web/pos/lhchat/erlhcoreclassmodelchat.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../../../livehelperchat/lhc_web/lib/core/lhchat/lhchat.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12750">
           <caret line="850" column="0" selection-start-line="841" selection-start-column="0" selection-end-line="850" selection-end-column="0" />
-          <folding>
-            <marker date="1478034097000" expanded="true" signature="19069:19210" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="19430:19594" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="20029:20209" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="20317:20520" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="20853:20951" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="21440:21603" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="22300:22451" ph="SELECT dep_i... " />
-            <marker date="1478034097000" expanded="true" signature="22692:22862" ph="SELECT count... " />
-            <marker date="1478034097000" expanded="true" signature="24029:24290" ph="SELECT count... count" />
-            <marker date="1478034097000" expanded="true" signature="24051:24273" ph="SELECT count... lh_users" />
-            <marker date="1478034097000" expanded="true" signature="24529:24754" ph="SELECT lh_us... lh_users" />
-            <marker date="1478034097000" expanded="true" signature="25898:26084" ph="SELECT lh_us... lh_users" />
-            <marker date="1478034097000" expanded="true" signature="26613:26785" ph="SELECT count... lh_users" />
-            <marker date="1478034097000" expanded="true" signature="27232:27390" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="27273:27356" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="27891:28050" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="27932:28016" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="28504:28659" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="28545:28625" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="29082:29260" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="29123:29226" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="29731:29888" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="29774:29854" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="30369:30506" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="30410:30472" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="30890:31053" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="30933:31019" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="33213:33303" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="35487:35666" ph="UPDATE lh_de... " />
-            <marker date="1478034097000" expanded="true" signature="53394:53469" ph="UPDATE lh_us... " />
-            <marker date="1478034097000" expanded="true" signature="56532:56734" ph="SELECT ((SEL... lh_chat" />
-            <marker date="1478034097000" expanded="true" signature="56541:56633" ph="SELECT MAX(l... lh_msg" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -599,6 +554,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#731#777#0#PHP" expanded="true" />
             <marker date="1482805127000" expanded="true" signature="17199:17309" ph="UPDATE lh_ch... " />
           </folding>
         </state>
@@ -623,40 +579,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12750">
           <caret line="850" column="0" selection-start-line="841" selection-start-column="0" selection-end-line="850" selection-end-column="0" />
-          <folding>
-            <marker date="1478034097000" expanded="true" signature="19069:19210" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="19430:19594" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="20029:20209" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="20317:20520" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="20853:20951" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="21440:21603" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="22300:22451" ph="SELECT dep_i... " />
-            <marker date="1478034097000" expanded="true" signature="22692:22862" ph="SELECT count... " />
-            <marker date="1478034097000" expanded="true" signature="24029:24290" ph="SELECT count... count" />
-            <marker date="1478034097000" expanded="true" signature="24051:24273" ph="SELECT count... lh_users" />
-            <marker date="1478034097000" expanded="true" signature="24529:24754" ph="SELECT lh_us... lh_users" />
-            <marker date="1478034097000" expanded="true" signature="25898:26084" ph="SELECT lh_us... lh_users" />
-            <marker date="1478034097000" expanded="true" signature="26613:26785" ph="SELECT count... lh_users" />
-            <marker date="1478034097000" expanded="true" signature="27232:27390" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="27273:27356" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="27891:28050" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="27932:28016" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="28504:28659" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="28545:28625" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="29082:29260" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="29123:29226" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="29731:29888" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="29774:29854" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="30369:30506" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="30410:30472" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="30890:31053" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="30933:31019" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="33213:33303" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="35487:35666" ph="UPDATE lh_de... " />
-            <marker date="1478034097000" expanded="true" signature="53394:53469" ph="UPDATE lh_us... " />
-            <marker date="1478034097000" expanded="true" signature="56532:56734" ph="SELECT ((SEL... lh_chat" />
-            <marker date="1478034097000" expanded="true" signature="56541:56633" ph="SELECT MAX(l... lh_msg" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -686,6 +608,7 @@
         <state relative-caret-position="7305">
           <caret line="506" column="24" selection-start-line="506" selection-start-column="24" selection-end-line="506" selection-end-column="24" />
           <folding>
+            <element signature="e#731#777#0#PHP" expanded="true" />
             <marker date="1482805127000" expanded="true" signature="17199:17309" ph="UPDATE lh_ch... " />
           </folding>
         </state>
@@ -710,40 +633,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12750">
           <caret line="850" column="0" selection-start-line="841" selection-start-column="0" selection-end-line="850" selection-end-column="0" />
-          <folding>
-            <marker date="1478034097000" expanded="true" signature="19069:19210" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="19430:19594" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="20029:20209" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="20317:20520" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="20853:20951" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="21440:21603" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="22300:22451" ph="SELECT dep_i... " />
-            <marker date="1478034097000" expanded="true" signature="22692:22862" ph="SELECT count... " />
-            <marker date="1478034097000" expanded="true" signature="24029:24290" ph="SELECT count... count" />
-            <marker date="1478034097000" expanded="true" signature="24051:24273" ph="SELECT count... lh_users" />
-            <marker date="1478034097000" expanded="true" signature="24529:24754" ph="SELECT lh_us... lh_users" />
-            <marker date="1478034097000" expanded="true" signature="25898:26084" ph="SELECT lh_us... lh_users" />
-            <marker date="1478034097000" expanded="true" signature="26613:26785" ph="SELECT count... lh_users" />
-            <marker date="1478034097000" expanded="true" signature="27232:27390" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="27273:27356" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="27891:28050" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="27932:28016" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="28504:28659" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="28545:28625" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="29082:29260" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="29123:29226" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="29731:29888" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="29774:29854" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="30369:30506" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="30410:30472" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="30890:31053" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="30933:31019" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="33213:33303" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="35487:35666" ph="UPDATE lh_de... " />
-            <marker date="1478034097000" expanded="true" signature="53394:53469" ph="UPDATE lh_us... " />
-            <marker date="1478034097000" expanded="true" signature="56532:56734" ph="SELECT ((SEL... lh_chat" />
-            <marker date="1478034097000" expanded="true" signature="56541:56633" ph="SELECT MAX(l... lh_msg" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -786,14 +675,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-          <folding>
-            <marker date="1478034097000" expanded="true" signature="4906:4965" ph="UPDATE lh_us... " />
-            <marker date="1478034097000" expanded="true" signature="5378:5433" ph="UPDATE lh_us... " />
-            <marker date="1478034097000" expanded="true" signature="7782:7841" ph="UPDATE lh_us... " />
-            <marker date="1478034097000" expanded="true" signature="9293:9349" ph="UPDATE lh_us... " />
-            <marker date="1478034097000" expanded="true" signature="10837:10914" ph="UPDATE lh_us... " />
-            <marker date="1478034097000" expanded="true" signature="11182:11220" ph="SELECT * FRO... lh_users" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -889,25 +770,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1455">
-          <caret line="97" column="64" selection-start-line="97" selection-start-column="49" selection-end-line="97" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Controller/ThreadController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="47" column="34" selection-start-line="47" selection-start-column="34" selection-end-line="47" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Constants.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="40" column="8" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -922,40 +788,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1905">
           <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
-          <folding>
-            <marker date="1478034097000" expanded="true" signature="19069:19210" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="19430:19594" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="20029:20209" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="20317:20520" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="20853:20951" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="21440:21603" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="22300:22451" ph="SELECT dep_i... " />
-            <marker date="1478034097000" expanded="true" signature="22692:22862" ph="SELECT count... " />
-            <marker date="1478034097000" expanded="true" signature="24029:24290" ph="SELECT count... count" />
-            <marker date="1478034097000" expanded="true" signature="24051:24273" ph="SELECT count... lh_users" />
-            <marker date="1478034097000" expanded="true" signature="24529:24754" ph="SELECT lh_us... lh_users" />
-            <marker date="1478034097000" expanded="true" signature="25898:26084" ph="SELECT lh_us... lh_users" />
-            <marker date="1478034097000" expanded="true" signature="26613:26785" ph="SELECT count... lh_users" />
-            <marker date="1478034097000" expanded="true" signature="27232:27390" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="27273:27356" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="27891:28050" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="27932:28016" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="28504:28659" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="28545:28625" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="29082:29260" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="29123:29226" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="29731:29888" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="29774:29854" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="30369:30506" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="30410:30472" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="30890:31053" ph="SELECT lh_ms... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="30933:31019" ph="SELECT id FR... lh_msg" />
-            <marker date="1478034097000" expanded="true" signature="33213:33303" ph="SELECT COUNT... " />
-            <marker date="1478034097000" expanded="true" signature="35487:35666" ph="UPDATE lh_de... " />
-            <marker date="1478034097000" expanded="true" signature="53394:53469" ph="UPDATE lh_us... " />
-            <marker date="1478034097000" expanded="true" signature="56532:56734" ph="SELECT ((SEL... lh_chat" />
-            <marker date="1478034097000" expanded="true" signature="56541:56633" ph="SELECT MAX(l... lh_msg" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -963,7 +795,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="22" column="127" selection-start-line="22" selection-start-column="84" selection-end-line="22" selection-end-column="127" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -971,7 +802,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
           <caret line="56" column="40" selection-start-line="56" selection-start-column="40" selection-end-line="56" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1015,6 +845,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1455">
+          <caret line="97" column="64" selection-start-line="97" selection-start-column="49" selection-end-line="97" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Controller/AbstractController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
@@ -1025,21 +863,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/ChatUtil.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="40" column="7" selection-start-line="40" selection-start-column="7" selection-end-line="40" selection-end-column="7" />
+          <folding>
+            <element signature="e#731#777#0#PHP" expanded="true" />
+            <marker date="1482805127000" expanded="true" signature="17199:17309" ph="UPDATE lh_ch... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Constants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="49" column="33" selection-start-line="49" selection-start-column="10" selection-end-line="49" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/UrlGeneratorUtil.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
+        <state relative-caret-position="570">
           <caret line="54" column="27" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/ChatUtil.php">
+    <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Model/Authorization.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <marker date="1482805127000" expanded="true" signature="17199:17309" ph="UPDATE lh_ch... " />
-          </folding>
+        <state relative-caret-position="180">
+          <caret line="233" column="57" selection-start-line="233" selection-start-column="57" selection-end-line="233" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/AccessManagerAPI.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-570">
+          <caret line="197" column="53" selection-start-line="197" selection-start-column="53" selection-end-line="197" selection-end-column="53" />
+          <folding />
         </state>
       </provider>
     </entry>

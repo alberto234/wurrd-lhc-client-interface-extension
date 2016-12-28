@@ -231,7 +231,7 @@ class Authorization
         // Load authorization info
 	   	$q = PersistentSession::getInstance()->createFindQuery(self::CLASS_NAME);
 		$conditions = array();
-		$conditions[] = $q->expr->eq('accesstoken', $q->bindValue($previousAccessToken));
+		$conditions[] = $q->expr->eq('previousaccesstoken', $q->bindValue($previousAccessToken));
 		$q->where ($conditions);
 		try {
 			$authorizations = PersistentSession::getInstance()->find($q);
