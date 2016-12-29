@@ -41,8 +41,12 @@ try {
 	$response = new Response($exception->getMessage(),
 		$exception->getStatusCode(),
 		array('content-type' => 'text/plain'));
+} catch (\Exception $exception) {
+	$response = new Response("Unexpected server error. " . $exception->getMessage() . " (" .
+		$exception->getFile() . "-" . $exception->getLine() . ")",
+		500,
+		array('content-type' => 'text/plain'));
 }
-
 $response->send();
 
 exit();

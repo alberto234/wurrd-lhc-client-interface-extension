@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="abb1ce29-42cc-4c4d-b00d-0e94310aeb82" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/ChatUtil.php" afterPath="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/ChatUtil.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Controller/AbstractController.php" afterPath="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Controller/AbstractController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Model/ChatExtension.php" afterPath="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Model/ChatExtension.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/lhwurrd/clientinterface.php" afterPath="$PROJECT_DIR$/modules/lhwurrd/clientinterface.php" />
     </list>
     <ignored path="wurrd.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,8 +27,8 @@
       <file leaf-file-name="clientinterface.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/lhwurrd/clientinterface.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="19" column="74" selection-start-line="19" selection-start-column="74" selection-end-line="19" selection-end-column="74" />
+            <state relative-caret-position="183">
+              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding>
                 <element signature="e#1074#1119#0#PHP" expanded="true" />
               </folding>
@@ -41,7 +39,7 @@
       <file leaf-file-name="ThreadController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Controller/ThreadController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
+            <state relative-caret-position="915">
               <caret line="84" column="77" selection-start-line="82" selection-start-column="8" selection-end-line="84" selection-end-column="77" />
               <folding />
             </state>
@@ -51,7 +49,7 @@
       <file leaf-file-name="AbstractRequestProcessor.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/classes/Wurrd/AbstractRequestProcessor.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="543">
+            <state relative-caret-position="1395">
               <caret line="113" column="5" selection-start-line="113" selection-start-column="5" selection-end-line="113" selection-end-column="5" />
               <folding>
                 <element signature="e#706#751#0#PHP" expanded="true" />
@@ -63,7 +61,7 @@
       <file leaf-file-name="ResourceNotFoundException.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/classes/Wurrd/Http/Exception/ResourceNotFoundException.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
+            <state relative-caret-position="90">
               <caret line="22" column="3" selection-start-line="22" selection-start-column="3" selection-end-line="22" selection-end-column="3" />
               <folding>
                 <element signature="e#7#684#0#PHP" expanded="true" />
@@ -72,22 +70,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChatUtil.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ChatUtil.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/ChatUtil.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="94">
-              <caret line="589" column="9" selection-start-line="589" selection-start-column="9" selection-end-line="589" selection-end-column="9" />
+            <state relative-caret-position="498">
+              <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
               <folding>
-                <marker date="1483042196000" expanded="true" signature="17315:17425" ph="UPDATE lh_ch... " />
+                <marker date="1483050529000" expanded="true" signature="17315:17425" ph="UPDATE lh_ch... " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChatExtension.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ChatExtension.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Model/ChatExtension.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
+            <state relative-caret-position="-495">
               <caret line="30" column="3" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
               <folding />
             </state>
@@ -127,7 +125,7 @@
       <file leaf-file-name="ClientInterfaceRequestProcessor.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/ClientInterfaceRequestProcessor.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
+            <state relative-caret-position="420">
               <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
               <folding />
             </state>
@@ -155,9 +153,9 @@
         <option value="$PROJECT_DIR$/lib/classes/Wurrd/Http/Exception/ResourceNotFoundException.php" />
         <option value="$PROJECT_DIR$/lib/classes/Wurrd/AbstractRequestProcessor.php" />
         <option value="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/ClientInterfaceRequestProcessor.php" />
+        <option value="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Model/ChatExtension.php" />
         <option value="$PROJECT_DIR$/modules/lhwurrd/clientinterface.php" />
         <option value="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/ChatUtil.php" />
-        <option value="$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Model/ChatExtension.php" />
       </list>
     </option>
   </component>
@@ -479,7 +477,8 @@
       <workItem from="1482973040680" duration="280000" />
       <workItem from="1482980293242" duration="1249000" />
       <workItem from="1483037919673" duration="2638000" />
-      <workItem from="1483040646465" duration="1688000" />
+      <workItem from="1483040646465" duration="2165000" />
+      <workItem from="1483050021219" duration="515000" />
     </task>
     <task id="LOCAL-00001" summary="Issue #4: Exposing visitor breadcrumb">
       <created>1478259053702</created>
@@ -523,24 +522,30 @@
       <option name="project" value="LOCAL" />
       <updated>1483042388275</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Issue #10: Exposing additional information about a chat session">
+      <created>1483042445992</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1483042445992</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41187000" />
+    <option name="totallyTimeSpent" value="42179000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="989" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2671875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2671875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6293478" sideWeight="0.31614584" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3206522" sideWeight="0.55625" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6293478" sideWeight="0.68385416" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3206522" sideWeight="0.44583333" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3206522" sideWeight="0.44375" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3271605" sideWeight="0.48125" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.116145834" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -552,6 +557,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6293478" sideWeight="0.68385416" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -569,10 +575,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Issue #4: Exposing visitor breadcrumb" />
-    <MESSAGE value="Issue #10: Exposing additional information about a chat session" />
     <MESSAGE value="Issue #11: Fix for issue where access tokens are not refreshed under certain conditions" />
     <MESSAGE value="Issue #8: Return HTTP 404 for invalid routes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Issue #8: Return HTTP 404 for invalid routes" />
+    <MESSAGE value="Issue #10: Exposing additional information about a chat session" />
+    <option name="LAST_COMMIT_MESSAGE" value="Issue #10: Exposing additional information about a chat session" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -613,7 +619,7 @@
         <state relative-caret-position="7305">
           <caret line="506" column="24" selection-start-line="506" selection-start-column="24" selection-end-line="506" selection-end-column="24" />
           <folding>
-            <marker date="1483042196000" expanded="true" signature="17315:17425" ph="UPDATE lh_ch... " />
+            <marker date="1483050529000" expanded="true" signature="17315:17425" ph="UPDATE lh_ch... " />
           </folding>
         </state>
       </provider>
@@ -834,7 +840,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2670">
           <caret line="197" column="53" selection-start-line="197" selection-start-column="53" selection-end-line="197" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -860,7 +865,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1455">
           <caret line="97" column="64" selection-start-line="97" selection-start-column="49" selection-end-line="97" selection-end-column="64" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -876,7 +880,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3015">
           <caret line="218" column="6" selection-start-line="218" selection-start-column="6" selection-end-line="218" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -914,7 +917,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/ClientInterfaceRequestProcessor.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
+        <state relative-caret-position="420">
           <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding />
         </state>
@@ -922,7 +925,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Controller/ThreadController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
+        <state relative-caret-position="915">
           <caret line="84" column="77" selection-start-line="82" selection-start-column="8" selection-end-line="84" selection-end-column="77" />
           <folding />
         </state>
@@ -930,7 +933,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/classes/Wurrd/AbstractRequestProcessor.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
+        <state relative-caret-position="1395">
           <caret line="113" column="5" selection-start-line="113" selection-start-column="5" selection-end-line="113" selection-end-column="5" />
           <folding>
             <element signature="e#706#751#0#PHP" expanded="true" />
@@ -938,19 +941,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/lhwurrd/clientinterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="19" column="74" selection-start-line="19" selection-start-column="74" selection-end-line="19" selection-end-column="74" />
-          <folding>
-            <element signature="e#1074#1119#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/classes/Wurrd/Http/Exception/ResourceNotFoundException.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
+        <state relative-caret-position="90">
           <caret line="22" column="3" selection-start-line="22" selection-start-column="3" selection-end-line="22" selection-end-column="3" />
           <folding>
             <element signature="e#7#684#0#PHP" expanded="true" />
@@ -958,21 +951,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/ChatUtil.php">
+    <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Model/ChatExtension.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
-          <caret line="589" column="9" selection-start-line="589" selection-start-column="9" selection-end-line="589" selection-end-column="9" />
+        <state relative-caret-position="-495">
+          <caret line="30" column="3" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/lhwurrd/clientinterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding>
-            <marker date="1483042196000" expanded="true" signature="17315:17425" ph="UPDATE lh_ch... " />
+            <element signature="e#1074#1119#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Model/ChatExtension.php">
+    <entry file="file://$PROJECT_DIR$/modules/lhwurrd/ClientInterface/Classes/ChatUtil.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="30" column="3" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
-          <folding />
+        <state relative-caret-position="498">
+          <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+          <folding>
+            <marker date="1483050529000" expanded="true" signature="17315:17425" ph="UPDATE lh_ch... " />
+          </folding>
         </state>
       </provider>
     </entry>
