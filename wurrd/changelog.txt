@@ -6,7 +6,7 @@ Issues tracked in GitHub repository https://github.com/alberto234/wurrd-lhc-clie
 ===================
 - Exposed additional information about a chat such as email and location data (Github issue 10).
   The client can use this information to provide a details view about the chat
-- Fixed an issue where we were failing to properly refresh access tokens in some certain cases.
+- Fixed an issue where we were failing to properly refresh access tokens in some certain cases. (Github issue 11)
   On the client this can cause random autologouts with session expired messages.
 
 1.0.3  - 2016-11-21
