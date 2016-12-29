@@ -96,6 +96,7 @@ class ChatUtil extends  \erLhcoreClassChat
 			$oneUpdatedThread['totalTime'] 		= $oneThread['time'];
 			$oneUpdatedThread['locale']			= $oneThread['chat_locale'];
 			$oneUpdatedThread['groupid'] 		= $oneThread['dep_id'];
+			$oneUpdatedThread['groupName'] 		= $oneThread['dep_name'];
 
 			$oneUpdatedThread['email'] 			= $oneThread['email'];
 			$oneUpdatedThread['phone'] 			= $oneThread['phone'];
@@ -103,6 +104,7 @@ class ChatUtil extends  \erLhcoreClassChat
 			$oneUpdatedThread['countryName'] 	= $oneThread['country_name'];
 			$oneUpdatedThread['latitude'] 		= $oneThread['lat'];
 			$oneUpdatedThread['longitude'] 		= $oneThread['lon'];
+			$oneUpdatedThread['city'] 			= $oneThread['city'];
 			$oneUpdatedThread['referrer'] 		= $oneThread['referrer'];
 			$oneUpdatedThread['sessionReferrer'] = $oneThread['session_referrer'];
 
@@ -542,10 +544,10 @@ class ChatUtil extends  \erLhcoreClassChat
 			$db = \ezcDbInstance::get();
 			$q = $db->createSelectQuery();
 
-			$q->select('lh_chat.id, nick, lh_chat.ip, user_id, status, time, chat_locale, lh_chat.dep_id, email, phone,
-						country_code, country_name, lh_chat.lat, lh_chat.lon, lh_chat.referrer, lh_chat.session_referrer ');
+			$q->select('lh_chat.id, nick, ip, user_id, status, time, chat_locale, dep_id, lh_chat.email, phone, ' .
+						'country_code, country_name, lat, lon, city, referrer, session_referrer, lh_departament.name as dep_name');
 			$q->from('lh_chat');
-			$q->leftJoin('lh_chat_online_user', $q->expr->eq('lh_chat.id', 'lh_chat_online_user.chat_id'));
+			$q->innerJoin('lh_departament', $q->expr->eq('dep_id', 'lh_departament.id'));
 
 			// Filters...
 			$conditions = array();
@@ -584,7 +586,7 @@ class ChatUtil extends  \erLhcoreClassChat
 
 			$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 		} catch (\Exception $exception) {
-			error_log('Exception:  ' . $exception->getMessage());
+			throw new Exception\HttpException(500, $exception->getMessage(), $exception, 0);
 		}
 
 		return $results;

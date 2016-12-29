@@ -174,15 +174,10 @@ class ChatExtension
         // Load chat extension info
 	   	$q = PersistentSession::getInstance()->createFindQuery('Wurrd\\ClientInterface\\Model\\ChatExtension');
 		$conditions = array();
-		error_log('highestrevision - 1 ' . print_r($q, true));
 		$conditions[] = $q->expr->max('revision');
-		error_log('highestrevision - 2');
 		$q->where ($conditions);
-		error_log('highestrevision - 3');
 		try {
-		error_log('highestrevision - 4');
 			$chatExtensions = PersistentSession::getInstance()->find($q);
-			error_log('Experiment ' . print_r($chatExtensions, true));
 			return $chatExtensions;
 		} catch (\Exception $ex) {
 			// error_log('not found');

@@ -43,7 +43,6 @@ abstract class AbstractController {
 	 * @throws \Wurrd\Http\Exception\AccessDeniedException
 	 */
 	protected function getXAuthToken(Request $request) {
-		$this->init($request);
 		$xauthToken = array();
 		
 		$tmp = $request->headers->get('x-auth-token');
@@ -61,6 +60,11 @@ abstract class AbstractController {
 	protected function init(Request $request) {
 		// Construct the UrlGeneratorUtil singleton
 		UrlGeneratorUtil::constructInstance($request);
+	}
+
+	public function __construct($request)
+	{
+		$this->init($request);
 	}
 }
 
