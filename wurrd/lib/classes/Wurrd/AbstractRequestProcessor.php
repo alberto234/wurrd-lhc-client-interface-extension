@@ -23,8 +23,10 @@ namespace Wurrd;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Router;
- 
- /**
+use Wurrd\Http\Exception\HttpException;
+use Wurrd\Http\Exception\ResourceNotFoundException;
+
+/**
  * Implements abstract class for request processing
  *
 */
@@ -38,16 +40,11 @@ abstract class AbstractRequestProcessor {
 		// Find the appropriate controller.
 		// Execute the controller
 		
-		try {
-            // Get controller and perform its action to get a response.
-            $controller = $this->getController($request);
-            $response = call_user_func($controller, $request);
-		} catch (Exception $e) {
-			error_log('AbstractRequestProcessor::handleRequest exception');
-
-		}
-		
-        return $response;
+		// Get controller and perform its action to get a response.
+		// No error handling here because these methods are going to throw an HttpException if one arises
+		$controller = $this->getController($request);
+		$response = call_user_func($controller, $request);
+		return $response;
     }
 	
 	
@@ -56,30 +53,33 @@ abstract class AbstractRequestProcessor {
      *
      * @param Request $request Incoming request.
      * @return callable
-     * @throws \InvalidArgumentException If the controller cannot be resolved.
+     * @throws HttpException If the controller cannot be resolved.
      */
     public function getController(Request $request)
     {
-    	
-		$parameters = $this->router->matchRequest($request);
-        $request->attributes->add($parameters);
-        $controller = $parameters['_controller'];
-        if (!$controller) {
-            //throw new \InvalidArgumentException('The "_controller" parameter is missed.');
-        }
+		try {
+			$parameters = $this->router->matchRequest($request);
+		} catch (\Symfony\Component\Routing\Exception\ResourceNotFoundException $ex) {
+			throw new ResourceNotFoundException($ex->getMessage(), 0, $ex);
+		}
+		$request->attributes->add($parameters);
+		$controller = $parameters['_controller'];
+		if (!$controller) {
+			throw new HttpException(500); // 'The "_controller" parameter is missed.');
+		}
 
-        // Build callable for specified controller
-        $callable = $this->createController($controller);
+		// Build callable for specified controller
+		$callable = $this->createController($controller, $request);
+		if (!is_callable($callable)) {
+			throw new HttpException(500);
+			/*throw new \InvalidArgumentException(sprintf(
+				'Controller "%s" for URI "%s" is not callable.',
+				$controller,
+				$request->getPathInfo()
+			));*/
+		}
 
-        if (!is_callable($callable)) {
-            /*throw new \InvalidArgumentException(sprintf(
-                'Controller "%s" for URI "%s" is not callable.',
-                $controller,
-                $request->getPathInfo()
-            ));*/
-        }
-
-        return $callable;
+		return $callable;
     }
 	
     /**
@@ -88,11 +88,13 @@ abstract class AbstractRequestProcessor {
      * @param string $controller Full controller name in "<Class>::<method>"
      *   format.
      * @return callable Controller callable
-     * @throws \InvalidArgumentException
+     * @throws HttpException
      */
-    protected function createController($controller)
+    protected function createController($controller, $request)
     {
+
         if (strpos($controller, '::') === false) {
+			throw new HttpException(500);
             /*throw new \InvalidArgumentException(sprintf(
                 'Unable to find controller "%s".',
                 $controller
@@ -102,11 +104,12 @@ abstract class AbstractRequestProcessor {
         list($class, $method) = explode('::', $controller, 2);
 
         if (!class_exists($class)) {
+			throw new HttpException(500);
             // throw new \InvalidArgumentException(sprintf('Class "%s" does not exist.', $class));
-            error_log(sprintf('Class "%s" does not exist.', $class));
+            // error_log(sprintf('Class "%s" does not exist.', $class));
         }
 
-        $object = new $class();
+        $object = new $class($request);
         return array($object, $method);
     }
 

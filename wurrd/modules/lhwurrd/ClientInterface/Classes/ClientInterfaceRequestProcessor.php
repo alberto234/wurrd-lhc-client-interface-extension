@@ -47,10 +47,6 @@ class ClientInterfaceRequestProcessor extends AbstractRequestProcessor {
 		    $requestContext
 		);
 	}
-	
-	public static function now() {
-		error_log('now');
-	}
 }
 
 

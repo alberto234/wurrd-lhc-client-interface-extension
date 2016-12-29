@@ -27,13 +27,21 @@
 
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Wurrd\ClientInterface\Classes\ClientInterfaceRequestProcessor;
+use Wurrd\Http\Exception\HttpException;
 
-$request = Request::createFromGlobals();
-$requestProcessor = new ClientInterfaceRequestProcessor($request);
+$response = null;
+try {
+	$request = Request::createFromGlobals();
+	$requestProcessor = new ClientInterfaceRequestProcessor($request);
 
-$response = $requestProcessor->handleRequest($request);
-
+	$response = $requestProcessor->handleRequest($request);
+} catch (HttpException $exception) {
+	$response = new Response($exception->getMessage(),
+		$exception->getStatusCode(),
+		array('content-type' => 'text/plain'));
+}
 
 $response->send();
 
