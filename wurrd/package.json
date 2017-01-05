@@ -1,6 +1,6 @@
                                                                                                                                                                                                                         {
     "name": "wurrd-lhc-client-interface-extension",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "An extension that provides an API for the Wurrd app to communicate with a LiveHelperChat server",
     "private": true,
     "bugs": {

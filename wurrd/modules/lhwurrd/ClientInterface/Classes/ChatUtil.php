@@ -107,6 +107,7 @@ class ChatUtil extends  \erLhcoreClassChat
 			$oneUpdatedThread['city'] 			= $oneThread['city'];
 			$oneUpdatedThread['referrer'] 		= $oneThread['referrer'];
 			$oneUpdatedThread['sessionReferrer'] = $oneThread['session_referrer'];
+			$oneUpdatedThread['fullUserAgent']	= $oneThread['user_agent'];
 
 			if (isset($oneUpdatedThread['countryCode']) && strlen($oneUpdatedThread['countryCode']) > 0) {
 				$oneUpdatedThread['flagUrl'] 	= UrlGeneratorUtil::getInstance()->fullUrl(\erLhcoreClassDesign::design('images/flags') . '/' . $oneUpdatedThread['countryCode'] . '.png');
@@ -544,10 +545,12 @@ class ChatUtil extends  \erLhcoreClassChat
 			$db = \ezcDbInstance::get();
 			$q = $db->createSelectQuery();
 
-			$q->select('lh_chat.id, nick, ip, user_id, status, time, chat_locale, dep_id, lh_chat.email, phone, ' .
-						'country_code, country_name, lat, lon, city, referrer, session_referrer, lh_departament.name as dep_name');
+			$q->select('lh_chat.id, nick, lh_chat.ip, lh_chat.user_id, status, lh_chat.time, chat_locale, lh_chat.dep_id, ' .
+						'lh_chat.email, phone, country_code, country_name, lh_chat.lat, lh_chat.lon, lh_chat.city, lh_chat.referrer, ' .
+						'lh_chat.session_referrer, lh_departament.name as dep_name, user_agent');
 			$q->from('lh_chat');
-			$q->innerJoin('lh_departament', $q->expr->eq('dep_id', 'lh_departament.id'));
+			$q->leftJoin('lh_chat_online_user', $q->expr->eq('online_user_id', 'lh_chat_online_user.id'));
+			$q->leftJoin('lh_departament', $q->expr->eq('lh_chat.dep_id', 'lh_departament.id'));
 
 			// Filters...
 			$conditions = array();

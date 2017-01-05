@@ -110,6 +110,11 @@ switch ((int)$Params['user_parameters']['step_id']) {
 			$versionProgress = '1.0.4';
 		}
 
+		if (version_compare($installedWCIVersion, '1.0.5') < 0) {
+			// No schema change this version
+			$versionProgress = '1.0.5';
+		}
+
 
 
 		// After all updates, save the latest version in the database. 
